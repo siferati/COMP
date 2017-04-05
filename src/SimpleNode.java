@@ -62,21 +62,10 @@ class SimpleNode implements Node {
      out its children. */
 
   public void dump(String prefix) {
-    System.out.println(toString(prefix));
 
-    switch (this.id) {
+    //System.out.println(toString(prefix));
 
-        case ParserTreeConstants.JJTEQUALS:
-          System.out.println("\t =");
-          break;
-
-        case ParserTreeConstants.JJTSTART:
-          break;
-
-        default:
-          System.out.println("\t " + this.value);
-          break;
-    }
+    System.out.println(prefix + this.value);
 
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {

@@ -1,1 +1,9 @@
 @ola = 3;
+@adeus = null;
+@adeus = @ola;
+if (@idade <= 19) {
+  @string = teenager;
+  if (@x != @string) {
+    @x = @ola;
+  }
+}

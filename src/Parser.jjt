@@ -39,41 +39,87 @@ SKIP :
 TOKEN :
 {
     < AT : "@" >
-  | < NUM : ["0"-"9"] >
+  | < NUM : (["0"-"9"])+ >
   | < UND : "_" >
   | < LETTER : ["a"-"z", "A"-"Z"] >
+  | < NULL : "null" >
+  | < IF : "if" >
   | < ID : (<UND> | <LETTER>) (<UND> | <LETTER> | <NUM>)* >
   | < PAT : <AT> <ID> >
-  | < EQ : "=" >
   | < SCOL : ";" >
+  | < OPAR : "(" >
+  | < CPAR : ")" >
+  | < OBRA : "{" >
+  | < CBRA : "}" >
+  | < LT : "<" >
+  | < GT : ">" >
+  | < EQ : "=" >
+  | < NOT : "!" >
+  | <COMP : <LT> | <GT> | <EQ><EQ> | <NOT><EQ> | <LT><EQ> | <GT><EQ> >
 }
-
 
 /**
-* Grammar @ola = 3;
+* CFG
 *
-* start -> equals EOF
-* equals -> pat EQ val SCOL
+* start -> stmt* EOF
+* stmt -> equals | cond
+* equals -> pat EQ (val | pat) SCOL
 * pat -> PAT
-* val -> ID | NUM
+* val -> ID | NUM | NULL
+* cond -> IF OPAR comp CPAR OBRA stmt* CBRA
+* comp -> pat COMP (val | pat)
 */
 
+// start -> stmt* EOF
 SimpleNode start() : {}
 {
-  equals() <EOF> {return jjtThis;}
+  {jjtThis.value = "start";}
+  (stmt())* <EOF> {return jjtThis;}
 }
 
-void equals() : {}
+// stmt -> equals | cond
+void stmt() #void : {}
 {
-  pat() <EQ> val() <SCOL>
+  equals() | cond()
 }
 
+// equals -> pat EQ (val | pat) SCOL
+void equals() : {Token t;}
+{
+  pat()
+  t = <EQ> {jjtThis.value = t.image;}
+  (val() | pat())
+  <SCOL>
+}
+
+// pat -> PAT
 void pat() : {Token t;}
 {
   t = <PAT> {jjtThis.value = t.image;}
 }
 
+// val -> ID | NUM | NULL
 void val() : {Token t;}
 {
-  t = <ID> | t = <NUM> {jjtThis.value = t.image;}
+  (t = <ID> | t = <NUM> | t = <NULL>)
+  {
+    jjtThis.value = t.image;
+  }
+}
+
+// cond -> IF OPAR comp CPAR OBRA stmt* CBRA
+void cond() : {Token t;}
+{
+  t = <IF> {jjtThis.value = t.image;} <OPAR> comp() <CPAR>
+  <OBRA>
+    (stmt())*
+  <CBRA>
+}
+
+// comp -> pat COMP (val | pat)
+void comp() : {Token t;}
+{
+  pat()
+  t = <COMP> {jjtThis.value = t.image;}
+  (val() | pat())
 }
