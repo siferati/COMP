@@ -68,12 +68,12 @@ void equals() : {}
   pat() <EQ> val() <SCOL>
 }
 
-void pat() : {}
+void pat() : {Token t;}
 {
-  <PAT>
+  t = <PAT> {jjtThis.value = t.image;}
 }
 
-void val() : {}
+void val() : {Token t;}
 {
-  <ID> | <NUM>
+  t = <ID> | t = <NUM> {jjtThis.value = t.image;}
 }
