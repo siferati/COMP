@@ -44,6 +44,9 @@ TOKEN :
   | < LETTER : ["a"-"z", "A"-"Z"] >
   | < NULL : "null" >
   | < IF : "if" >
+  | < TYPE : <INT> | <LONG> >
+  | < #INT : "int" >
+  | < #LONG : "long" >
   | < ID : (<UND> | <LETTER>) (<UND> | <LETTER> | <NUM>)* >
   | < PAT : <AT> <ID> >
   | < SCOL : ";" >
@@ -55,19 +58,20 @@ TOKEN :
   | < GT : ">" >
   | < EQ : "=" >
   | < NOT : "!" >
-  | <COMP : <LT> | <GT> | <EQ><EQ> | <NOT><EQ> | <LT><EQ> | <GT><EQ> >
+  | < COMP : <LT> | <GT> | <EQ><EQ> | <NOT><EQ> | <LT><EQ> | <GT><EQ> >
 }
 
 /**
 * CFG
 *
 * start -> stmt* EOF
-* stmt -> equals | cond
-* equals -> pat EQ (val | pat) SCOL
+* stmt -> assign | cond | decl
+* assign -> pat EQ (val | pat) SCOL
 * pat -> PAT
 * val -> ID | NUM | NULL
 * cond -> IF OPAR comp CPAR OBRA stmt* CBRA
 * comp -> pat COMP (val | pat)
+* decl -> TYPE pat SCOL
 */
 
 // start -> stmt* EOF
@@ -77,14 +81,14 @@ SimpleNode start() : {}
   (stmt())* <EOF> {return jjtThis;}
 }
 
-// stmt -> equals | cond
+// stmt -> assign | cond
 void stmt() #void : {}
 {
-  equals() | cond()
+  assign() | cond() | decl()
 }
 
-// equals -> pat EQ (val | pat) SCOL
-void equals() : {Token t;}
+// assign -> pat EQ (val | pat) SCOL
+void assign() : {Token t;}
 {
   pat()
   t = <EQ> {jjtThis.value = t.image;}
@@ -122,4 +126,12 @@ void comp() : {Token t;}
   pat()
   t = <COMP> {jjtThis.value = t.image;}
   (val() | pat())
+}
+
+// decl -> TYPE pat SCOL
+void decl() : {Token t;}
+{
+  t = <TYPE> {jjtThis.value = t.image;}
+  pat()
+  <SCOL>
 }

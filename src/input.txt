@@ -7,3 +7,5 @@ if (@idade <= 19) {
     @x = @ola;
   }
 }
+int @sayonara;
+long @meh;
