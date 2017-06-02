@@ -19,7 +19,7 @@
 ### GSON (json to map)
 
 * Open terminal inside ``GSON/``
-* Type ``javac -d ../bin -cp .:gson-2.8.0.jar GsonTest.java``
+* Type ``javac -d ../bin -cp .;gson-2.8.0.jar GsonTest.java``
 * Type ``java -cp .;gson-2.8.0.jar;../bin GsonTest``
 
 

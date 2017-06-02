@@ -63,7 +63,8 @@
         "body": {
           "nodetype": "Block",
           "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:3",
-          "statements": [{
+          "statements": [
+            {
             "nodetype": "LocalVariable",
             "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
             "name": "a",
@@ -80,7 +81,17 @@
                 "name": "int"
                 }
               }
-            }]
+            },
+            {
+            "nodetype": "LocalVariable",
+            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:6",
+            "name": "b",
+            "type": {
+              "nodetype": "TypeReference",
+              "name": "int"
+              }
+            }
+          ]
           }
         }
       ]
