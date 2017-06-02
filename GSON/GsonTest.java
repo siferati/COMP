@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.gson.Gson;
@@ -38,11 +39,77 @@ public class GsonTest {
 		.registerTypeAdapter(Statement.class, typeAdapter)
 		.create();
 
-        File json = new File("ast.json");
+    File json = new File("ast.json");
 
-        Root javaRootMapObject = gson.fromJson(read(json), Root.class);
+    Root javaRootMapObject = gson.fromJson(read(json), Root.class);
 
-		System.out.println(javaRootMapObject);
+    List<CompilationUnit> compilationUnits = javaRootMapObject.getCompilationUnits();
+
+    // there is only one compilation unit
+    List<Type> types = compilationUnits.get(0).getTypes();
+
+    // get class
+    ClassNode classNode = (ClassNode) types.get(0);
+    System.out.println("class name: " + classNode.getName());
+
+    // get all members
+    List<Member> members = classNode.getMembers();
+
+    // get first method
+    Method method = (Method) members.get(1);
+    System.out.println("method name: " + method.getName());
+
+    // get method's body statements
+    List<Statement> statements = ((Block) method.getBody()).getStatements();
+
+    System.out.println("statements:");
+
+    for (int i = 0; i < statements.size(); i++) {
+
+      switch (statements.get(i).getNodetype()) {
+
+        case "LocalVariable":
+          LocalVariable localVariable = (LocalVariable) statements.get(i);
+
+          // get variable type (int, long, double, etc)
+          String variableType = localVariable.getType().getName();
+
+          // get variable name
+          String variableName = localVariable.getName();
+
+          // get initialization
+          String initString = "= ";
+
+          switch (localVariable.getInit().getNodetype()) {
+
+            case "Literal":
+              Literal literal = (Literal) localVariable.getInit();
+
+              // get value
+              String literalValue = literal.getValue();
+
+              // store initialization
+              initString += literalValue;
+              break;
+
+            default:
+              System.out.println("Unsupported note type");
+              break;
+
+          }
+
+          System.out.println(variableType + " " + variableName + " " + initString);
+          break;
+
+        default:
+          System.out.println("Unsupported note type");
+          break;
+      }
+    }
+
+
+
+		//System.out.println(javaRootMapObject);
 
 
     }

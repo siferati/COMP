@@ -8,11 +8,6 @@
       "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:1",
       "name": "HelloWorld",
       "package": "",
-      "super": {
-        "nodetype": "TypeReference",
-        "name": "BasicNode",
-        "package": ""
-        },
       "members": [
         {
         "nodetype": "Constructor",
@@ -30,13 +25,13 @@
               "name": "<init>",
               "declarator": {
                 "nodetype": "TypeReference",
-                "name": "BasicNode",
-                "package": ""
+                "name": "Object",
+                "package": "java.lang"
                 },
               "type": {
                 "nodetype": "TypeReference",
-                "name": "BasicNode",
-                "package": ""
+                "name": "Object",
+                "package": "java.lang"
                 },
               "parameters": []
               },
@@ -69,145 +64,21 @@
           "nodetype": "Block",
           "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:3",
           "statements": [{
-            "nodetype": "For",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
-            "init": [{
-              "nodetype": "LocalVariable",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
-              "name": "i",
-              "type": {
-                "nodetype": "TypeReference",
-                "name": "int"
-                },
-              "init": {
-                "nodetype": "Literal",
-                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
-                "value": 0,
-                "type": {
-                  "nodetype": "TypeReference",
-                  "name": "int"
-                  }
-                }
-              }],
-            "condition": {
-              "nodetype": "BinaryOperator",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
-              "type": {
-                "nodetype": "TypeReference",
-                "name": "boolean"
-                },
-              "operator": "<",
-              "lhs": {
-                "nodetype": "VariableRead",
-                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
-                "var": {
-                  "nodetype": "LocalVariableReference",
-                  "name": "i",
-                  "type": {
-                    "nodetype": "TypeReference",
-                    "name": "int"
-                    }
-                  }
-                },
-              "rhs": {
-                "nodetype": "Literal",
-                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
-                "value": 9,
-                "type": {
-                  "nodetype": "TypeReference",
-                  "name": "int"
-                  }
-                }
+            "nodetype": "LocalVariable",
+            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
+            "name": "a",
+            "type": {
+              "nodetype": "TypeReference",
+              "name": "int"
               },
-            "update": [{
-              "nodetype": "UnaryOperator",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
+            "init": {
+              "nodetype": "Literal",
+              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
+              "value": 2,
               "type": {
                 "nodetype": "TypeReference",
                 "name": "int"
-                },
-              "operator": "_++",
-              "operand": {
-                "nodetype": "VariableWrite",
-                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
-                "var": {
-                  "nodetype": "LocalVariableReference",
-                  "name": "i",
-                  "type": {
-                    "nodetype": "TypeReference",
-                    "name": "int"
-                    }
-                  }
                 }
-              }],
-            "body": {
-              "nodetype": "Block",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:4",
-              "statements": [{
-                "nodetype": "Invocation",
-                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
-                "target": {
-                  "nodetype": "FieldRead",
-                  "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
-                  "target": {
-                    "nodetype": "TypeAccess",
-                    "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
-                    "target": {
-                      "nodetype": "TypeReference",
-                      "name": "System",
-                      "package": "java.lang"
-                      }
-                    },
-                  "var": {
-                    "nodetype": "FieldReference",
-                    "name": "out",
-                    "declarator": {
-                      "nodetype": "TypeReference",
-                      "name": "System",
-                      "package": "java.lang"
-                      },
-                    "type": {
-                      "nodetype": "TypeReference",
-                      "name": "PrintStream",
-                      "package": "java.io"
-                      }
-                    }
-                  },
-                "executable": {
-                  "nodetype": "ExecutableReference",
-                  "name": "println",
-                  "declarator": {
-                    "nodetype": "TypeReference",
-                    "name": "PrintStream",
-                    "package": "java.io"
-                    },
-                  "type": {
-                    "nodetype": "TypeReference",
-                    "name": "void"
-                    },
-                  "parameters": [{
-                    "nodetype": "TypeReference",
-                    "name": "String",
-                    "package": "java.lang"
-                    }]
-                  },
-                "arguments": [{
-                  "nodetype": "Literal",
-                  "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
-                  "value": "Ola",
-                  "type": {
-                    "nodetype": "TypeReference",
-                    "name": "String",
-                    "package": "java.lang"
-                    }
-                  }],
-                "comments": [{
-                  "nodetype": "Comment",
-                  "type": "inline",
-                  "content": "comentario",
-                  "position": "after"
-                  }]
-                }]
               }
             }]
           }

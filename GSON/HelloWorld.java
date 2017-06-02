@@ -1,9 +1,8 @@
-public class HelloWorld extends BasicNode {
+public class HelloWorld  {
 
     public static void main(String[] args) {
-		for(int i = 0; i < 9; i++){
-			System.out.println("Ola");	// comentario
-		}
-    } 
+
+        int a = 2;
+    }
 
 }
