@@ -3,3 +3,4 @@ src/*
 !src/SimpleNode.java
 !src/Parser.jjt
 !src/input.txt
+*.class

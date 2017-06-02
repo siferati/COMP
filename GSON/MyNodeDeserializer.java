@@ -1,9 +1,9 @@
-import com.google.gson.Gson; 
-import com.google.gson.GsonBuilder; 
-import com.google.gson.JsonDeserializationContext; 
-import com.google.gson.JsonDeserializer; 
-import com.google.gson.JsonElement; 
-import com.google.gson.JsonObject; 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
@@ -11,13 +11,13 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
  @Override
 	public BasicNode deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) {
 		try {
-		JsonObject jsonObj = jsonElement.getAsJsonObject();  // vão buscar o objeto atual como um JsonObject para poderem ir buscar a propriedade que querem
+		JsonObject jsonObj = jsonElement.getAsJsonObject();  // vao buscar o objeto atual como um JsonObject para poderem ir buscar a propriedade que querem
 		JsonElement nodeTypeEl = jsonObj.get("nodetype"); 	 // get the type of the node so we can use the correct class
 		if (nodeTypeEl == null) {
 			throw new RuntimeException("nodetype property must be defined!"); // all JSON objects must have the property nodetype
 		}
 		String nodeType = nodeTypeEl.getAsString().toUpperCase(); // simply casting the object as string
-		
+
 		Class<? extends BasicNode> classToUse = null;
 		switch(nodeType) {
 			case "TYPEREFERENCE":
@@ -32,7 +32,7 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 			case "VARIABLEREAD":
 				classToUse = VariableRead.class;
 				break;
-			case "LOCALVARIABLEREFERENCE":	
+			case "LOCALVARIABLEREFERENCE":
 				classToUse = LocalVariableReference.class;
 				break;
 			case "BLOCK":
@@ -74,5 +74,5 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 			throw new JsonParseException(e);
 		}
 	}
-	
+
 }
