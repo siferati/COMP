@@ -5,6 +5,23 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+
+import nodes.BasicNode;
+import expression.BinaryOperator;
+import expression.Literal;
+import expression.LocalVariableReference;
+import expression.VariableRead;
+import member.Constructor;
+import member.Method;
+import reference.ArrayTypeReference;
+import reference.ExecutableReference;
+import reference.Parameter;
+import reference.TypeReference;
+import statement.Block;
+import statement.ClassNode;
+import statement.LocalVariable;
+import statement.Invocation;
+
 import java.lang.reflect.Type;
 
 public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {

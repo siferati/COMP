@@ -1,3 +1,7 @@
+
+import nodes.BasicNode;
+import nodes.Type;
+
 import java.util.*;
 
 public class CompilationUnit extends BasicNode {

@@ -24,6 +24,16 @@ import java.util.logging.Logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import nodes.BasicNode;
+import member.Method;
+import nodes.Expression;
+import nodes.Member;
+import nodes.Reference;
+import nodes.Statement;
+import nodes.Type;
+import statement.Block;
+import statement.ClassNode;
+
 public class GsonTest {
 
   final public static String DEFAULT_CHAR_SET = "UTF-8";
@@ -113,26 +123,27 @@ public class GsonTest {
 
     // get class
     ClassNode classNode = (ClassNode) types.get(0);
-    System.out.println("class name: " + classNode.getName());
+    System.out.println("(Class) - Name: " + classNode.getName());
 
     // get all members
     List<Member> members = classNode.getMembers();
 
-    // TODO ciclo for para cada membro, como em baixo, para os statements
-
+    System.out.println("\nMembers: ");
+    for (int i = 0; i < members.size(); i++) {
+    	members.get(i).analyze();
+    }
+    
     // get first method
     Method method = (Method) members.get(1);
-    System.out.println("method name: " + method.getName());
+    System.out.println("(Class -> Method) - Name: " + method.getName());
 
     // get method's body statements
     List<Statement> statements = ((Block) method.getBody()).getStatements();
 
-    System.out.println("statements:");
+    System.out.println("\nStatements: ");
 
     for (int i = 0; i < statements.size(); i++) {
-
       statements.get(i).analyze();
-
     }
   }
 }
