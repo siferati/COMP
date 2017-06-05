@@ -60,8 +60,6 @@ public class Main {
 
       Match match = matchedNodes.get(i);
 
-      System.out.println(match);
-
       if (!match.pattern.contains("@")) {
         found = false;
         break;

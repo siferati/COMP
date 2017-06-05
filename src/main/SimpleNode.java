@@ -84,10 +84,6 @@ class SimpleNode implements Node {
   */
   public void findPattern(GsonTest gson) {
 
-    //System.out.println("pattern: " + this.value);
-
-    gson.analyze(gson.javaRootMapObject, this);
-
     // go through all children if this is tree root
     if (Main.starting) {
 
@@ -101,7 +97,8 @@ class SimpleNode implements Node {
           }
         }
       }
-
+    } else {
+      gson.analyze(gson.javaRootMapObject, this);
     }
 
 
