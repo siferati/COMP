@@ -124,7 +124,7 @@ public class Statement extends BasicNode {
       		List<Statement> cases = switchstmt.getCases();
 
       		for(int i = 0; i < cases.size(); i++) {
-      			cases.get(i).analyze();
+      			cases.get(i).analyze("");
       		}
 
       		break;
@@ -135,10 +135,10 @@ public class Statement extends BasicNode {
       		statements = casestmt.getStatements();
 
       		if(expression != null)
-      			expression.analyze();
+      			expression.analyze("");
 
       		for(int i = 0; i < statements.size(); i++) {
-      			statements.get(i).analyze();
+      			statements.get(i).analyze("");
       		}
 
       		break;

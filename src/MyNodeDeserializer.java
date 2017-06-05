@@ -45,8 +45,8 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 				throw new RuntimeException("nodetype property must be defined!"); // all JSON objects must have the property nodetype
 		}
 		String nodeType = nodeTypeEl.getAsString().toUpperCase(); // simply casting the object as string
-		
-		System.out.println("NODETYPE " + nodeType);
+
+		//System.out.println("NODETYPE " + nodeType);
 		Class<? extends BasicNode> classToUse = null;
 		switch(nodeType) {
 			case "TYPEREFERENCE":
