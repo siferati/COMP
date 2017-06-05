@@ -2,6 +2,7 @@ package main;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
@@ -29,6 +30,8 @@ public class Main {
         GsonTest gsonTest = new GsonTest();
 
         root.findPattern(gsonTest);
+
+        System.out.println(Arrays.toString(matchedNodes.toArray()));
 
       }
     }

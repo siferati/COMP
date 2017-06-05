@@ -10,9 +10,6 @@ public class Statement extends BasicNode {
 
   public String analyze(String pattern) {
 
-      // get initialization
-      String initString = "";
-
 	  switch (getNodetype()) {
       	case "LocalVariable":
 	        LocalVariable localVariable = (LocalVariable) this;
@@ -25,11 +22,11 @@ public class Statement extends BasicNode {
 
           // when its NOT only declaration
 	        if (localVariable.getInit() != null) {
-	          initString += "= " + localVariable.getInit().analyze(pattern);
+	          String content = variableName + " = " + localVariable.getInit().analyze(pattern);
 
             if (pattern.equals("=")) {
               System.out.println("Found pattern on line " + localVariable.getLocation());
-              Main.matchedNodes.add(new Match(pattern, "=", localVariable.getLocation()));
+              Main.matchedNodes.add(new Match(pattern, content, localVariable.getLocation()));
             }
 	        }
 
@@ -149,6 +146,6 @@ public class Statement extends BasicNode {
 	        //System.out.println("Unsupported Node Type");
 	        break;
 	  }
-	  return initString;
+	  return "";
   }
  }

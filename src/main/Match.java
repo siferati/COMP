@@ -12,5 +12,10 @@ public class Match {
     this.location = location;
   }
 
+  @Override
+  public String toString() {
+    return pattern + " : " + content + " : " + location;
+  }
+
 
 }
