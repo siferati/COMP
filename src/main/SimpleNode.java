@@ -84,7 +84,7 @@ class SimpleNode implements Node {
   */
   public void findPattern(GsonTest gson) {
 
-    System.out.println("pattern: " + this.value);
+    //System.out.println("pattern: " + this.value);
 
     gson.analyze(gson.javaRootMapObject, this);
 
@@ -106,6 +106,10 @@ class SimpleNode implements Node {
 
   public Object getValue() {
     return value;
+  }
+
+  public Node[] getChildren() {
+    return children;
   }
 }
 

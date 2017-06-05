@@ -31,12 +31,19 @@ public class Main {
 
         root.findPattern(gsonTest);
 
-        System.out.println(Arrays.toString(matchedNodes.toArray()));
+        displayPatternsFound();
 
       }
     }
     catch (Exception e) {
       System.out.println("Error: " + e);
+    }
+  }
+
+  public static void displayPatternsFound() {
+
+    for (Match match : matchedNodes) {
+      //System.out.println(match);
     }
   }
 }
