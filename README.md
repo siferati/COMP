@@ -2,7 +2,7 @@
 
 ## How to run
 
-* Open terminal inside ``src/``
+* Open terminal inside ``src/main``
 * Type ``jjtree Parser.jjt``
 * Type ``javacc Parser.jj``
 
