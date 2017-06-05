@@ -112,7 +112,7 @@ public class GsonTest {
   *
   * @param javaRootMapObject Tree root
   */
-  public void analyze(Root javaRootMapObject, String pattern) {
+  public void analyze(Root javaRootMapObject, SimpleNode patternNode) {
 
     List<CompilationUnit> compilationUnits = javaRootMapObject.getCompilationUnits();
 
@@ -120,7 +120,7 @@ public class GsonTest {
     List<Type> types = compilationUnits.get(0).getTypes();
 
     for(int i = 0; i < types.size(); i++) {
-    	types.get(i).analyze(pattern);
+    	types.get(i).analyze(patternNode);
     }
   }
 }

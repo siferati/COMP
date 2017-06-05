@@ -6,6 +6,7 @@ import reference.Parameter;
 import member.Constructor;
 import member.Method;
 import nodes.BasicNode;
+import main.*;
 
 public class Member extends BasicNode {
 	protected String name;
@@ -14,7 +15,7 @@ public class Member extends BasicNode {
 		return name;
 	}
 
-	public void analyze(String pattern) {
+	public void analyze(SimpleNode patternNode) {
 
 		switch (getNodetype()) {
 			case "Constructor":
@@ -28,11 +29,11 @@ public class Member extends BasicNode {
 
 		        //System.out.println("\n\tParameters:");
 				for(int i = 0; i < parameters.size(); i++) {
-					parameters.get(i).analyze(pattern);
+					parameters.get(i).analyze(patternNode);
 				}
 
 				Statement statement = constructor.getBody();
-				statement.analyze(pattern);
+				statement.analyze(patternNode);
 				break;
 			case "Method":
 				Method method = (Method)this;
@@ -44,17 +45,17 @@ public class Member extends BasicNode {
 
 		        //System.out.println("\n\tParameters:");
 				for(int i = 0; i < param.size(); i++) {
-					param.get(i).analyze(pattern);
+					param.get(i).analyze(patternNode);
 				}
 
 				if (type != null)
-					type.analyze(pattern);
+					type.analyze(patternNode);
 
 				if(name != null)
 					//System.out.println("Method - Name: " + name);
 
 				if(body != null)
-					body.analyze(pattern);
+					body.analyze(patternNode);
 
 				break;
 			default:

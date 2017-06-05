@@ -4,6 +4,8 @@ import java.util.List;
 
 import type.ClassNode;
 
+import main.*;
+
 public class Type extends BasicNode {
 	protected String name;
 
@@ -11,7 +13,7 @@ public class Type extends BasicNode {
 		return name;
 	}
 
-	public void analyze(String pattern) {
+	public void analyze(SimpleNode patternNode) {
 
 		  switch (getNodetype()) {
 	      	case "Class":
@@ -30,7 +32,7 @@ public class Type extends BasicNode {
 
 		        //System.out.println("\n\tMembers:");
 		        for(int i = 0; i < members.size(); i++) {
-		        	members.get(i).analyze(pattern);
+		        	members.get(i).analyze(patternNode);
 		        }
 		        break;
 	      	default:

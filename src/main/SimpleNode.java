@@ -86,7 +86,7 @@ class SimpleNode implements Node {
 
     System.out.println("pattern: " + this.value);
 
-    gson.analyze(gson.javaRootMapObject, this.value.toString());
+    gson.analyze(gson.javaRootMapObject, this);
 
     // go through all children
     if (children != null) {
@@ -102,6 +102,10 @@ class SimpleNode implements Node {
 
   public int getId() {
     return id;
+  }
+
+  public Object getValue() {
+    return value;
   }
 }
 
