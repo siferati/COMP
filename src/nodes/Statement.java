@@ -117,6 +117,31 @@ public class Statement extends BasicNode {
       			update.get(i).analyze(pattern);
 
       		break;
+      	case "Switch":
+      		Switch switchstmt = (Switch) this;
+
+      		condition = switchstmt.getCondition();
+      		List<Statement> cases = switchstmt.getCases();
+
+      		for(int i = 0; i < cases.size(); i++) {
+      			cases.get(i).analyze();
+      		}
+
+      		break;
+      	case "Case":
+      		Case casestmt = (Case) this;
+
+      		Expression expression = casestmt.getExpression();
+      		statements = casestmt.getStatements();
+
+      		if(expression != null)
+      			expression.analyze();
+
+      		for(int i = 0; i < statements.size(); i++) {
+      			statements.get(i).analyze();
+      		}
+
+      		break;
       	default:
 	        //System.out.println("Unsupported Node Type");
 	        break;

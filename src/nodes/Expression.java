@@ -143,6 +143,8 @@ public class Expression extends BasicNode {
 					type.analyze(pattern);
 
 				break;
+			case "NullNode":
+				break;
 			default:
 				//System.out.println("Unsupported note type");
 				break;
