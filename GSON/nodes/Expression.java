@@ -5,16 +5,12 @@ import expression.FieldRead;
 import expression.Literal;
 import expression.LocalVariableReference;
 import expression.TypeAccess;
+import expression.UnaryOperator;
 import expression.VariableRead;
+import expression.VariableWrite;
 import nodes.BasicNode;
 
-public abstract class Expression extends BasicNode{
-	protected Reference type;
-
-	public Reference getTypeReference() {
-		return type;
-	}
-
+public class Expression extends BasicNode {
 	public String analyze() {
 
 		String retorno = "";
@@ -37,7 +33,7 @@ public abstract class Expression extends BasicNode{
 				Expression lhsExp = binaryOp.getLhs();
 				Expression rhsExp = binaryOp.getRhs();
 				String op = binaryOp.getOperator();
-				type = getTypeReference();
+				Reference type = (Reference)binaryOp.getTypeReference();
 				
 				String lhs = lhsExp.analyze();
 				String rhs = rhsExp.analyze();
@@ -52,10 +48,35 @@ public abstract class Expression extends BasicNode{
 				}
 				
 				break;
+			case "UnaryOperator":
+				UnaryOperator unaryOperator = (UnaryOperator) this;
+				
+				String unary_op = unaryOperator.getOperator();
+				Expression operand = unaryOperator.getOperand();
+				
+				String tmpOp = "";
+				switch(unary_op) {
+					case "_++":
+						tmpOp = "++";
+						break;
+					case "_--":
+						tmpOp = "--";
+						break;
+					default:
+						System.out.println("UnaryOperator - error: wrong operator");
+				}
+				
+				String res = operand.analyze();
+				System.out.println("UnaryOperator: " + res + tmpOp);
+				
+				temp = res + tmpOp;
+				retorno += temp;
+				
+				break;
 			case "VariableRead":
 				VariableRead varRead = (VariableRead) this;
 				
-				type = getTypeReference();
+				type = varRead.getTypeReference();
 				Expression var = varRead.getVar();
 
 				if(type != null)
@@ -69,7 +90,7 @@ public abstract class Expression extends BasicNode{
 				LocalVariableReference localVarRef = (LocalVariableReference) this;
 				
 				String name = localVarRef.getName();
-				type = getTypeReference();
+				type = localVarRef.getTypeReference();
 				
 				if(name != null)
 					System.out.println("LocalVariableReference - Name: " + name);
@@ -84,7 +105,7 @@ public abstract class Expression extends BasicNode{
 				TypeAccess typeAcc = (TypeAccess) this;
 				
 				Reference target = typeAcc.getTarget();
-				type = getTypeReference();
+				type = typeAcc.getTypeReference();
 				
 				if(target != null)
 					target.analyze();
@@ -98,7 +119,7 @@ public abstract class Expression extends BasicNode{
 				
 				Expression targetFR = fieldRead.getTarget();
 				Reference varFR = fieldRead.getVar();
-				type = getTypeReference();
+				type = fieldRead.getTypeReference();
 				
 				if(targetFR != null)
 					targetFR.analyze();
@@ -108,6 +129,19 @@ public abstract class Expression extends BasicNode{
 					
 				if(type != null)
 					type.analyze();
+				break;
+			case "VariableWrite":
+				VariableWrite variableWrite = (VariableWrite) this;
+				
+				Expression varVW = variableWrite.getVar();
+				type = variableWrite.getTypeReference();
+				
+				if(varVW != null)
+					retorno = varVW.analyze();
+					
+				if(type != null)
+					type.analyze();
+				
 				break;
 			default:
 				System.out.println("Unsupported note type");

@@ -89,6 +89,29 @@ public class Statement extends BasicNode {
       			elseVar.analyze();
       		
       		break;
+      	case "Break":
+      		break;
+      	case "For":
+      		For forstatement = (For)this;
+      		
+      		Statement body = forstatement.getBody();
+      		Expression condition = forstatement.getCondition();
+      		List<Statement> init = forstatement.getInit();
+      		List<Expression> update = forstatement.getUpdate();
+      		
+      		if(body != null)
+      			body.analyze();
+      		
+      		for(int i = 0; i < init.size(); i++)
+      			init.get(i).analyze();
+      		
+      		if(condition != null)
+      			condition.analyze();
+      		
+      		for(int i = 0; i < update.size(); i++)
+      			update.get(i).analyze();
+      		
+      		break;
       	default:
 	        System.out.println("Unsupported Node Type");
 	        break;

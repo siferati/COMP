@@ -2,24 +2,24 @@
   "nodetype": "Root",
   "compilation_units": [{
     "nodetype": "CompilationUnit",
-    "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java",
+    "location": "D:/COMP/GSON/HelloWorld.java",
     "types": [{
       "nodetype": "Class",
-      "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:1",
+      "location": "D:/COMP/GSON/HelloWorld.java:1",
       "name": "HelloWorld",
       "package": "",
       "members": [
         {
         "nodetype": "Constructor",
-        "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:1",
+        "location": "D:/COMP/GSON/HelloWorld.java:1",
         "name": "<init>",
         "parameters": [],
         "body": {
           "nodetype": "Block",
-          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:1",
+          "location": "D:/COMP/GSON/HelloWorld.java:1",
           "statements": [{
             "nodetype": "Invocation",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:1",
+            "location": "D:/COMP/GSON/HelloWorld.java:1",
             "executable": {
               "nodetype": "ExecutableReference",
               "name": "<init>",
@@ -41,7 +41,7 @@
         },
         {
         "nodetype": "Method",
-        "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:3",
+        "location": "D:/COMP/GSON/HelloWorld.java:3",
         "name": "main",
         "type": {
           "nodetype": "TypeReference",
@@ -49,7 +49,7 @@
           },
         "parameters": [{
           "nodetype": "Parameter",
-          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:3",
+          "location": "D:/COMP/GSON/HelloWorld.java:3",
           "name": "args",
           "type": {
             "nodetype": "ArrayTypeReference",
@@ -62,11 +62,11 @@
           }],
         "body": {
           "nodetype": "Block",
-          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:3",
+          "location": "D:/COMP/GSON/HelloWorld.java:3",
           "statements": [
             {
             "nodetype": "LocalVariable",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
+            "location": "D:/COMP/GSON/HelloWorld.java:5",
             "name": "a",
             "type": {
               "nodetype": "TypeReference",
@@ -74,7 +74,7 @@
               },
             "init": {
               "nodetype": "Literal",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:5",
+              "location": "D:/COMP/GSON/HelloWorld.java:5",
               "value": 2,
               "type": {
                 "nodetype": "TypeReference",
@@ -84,12 +84,111 @@
             },
             {
             "nodetype": "LocalVariable",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/GSON/HelloWorld.java:6",
+            "location": "D:/COMP/GSON/HelloWorld.java:6",
             "name": "b",
             "type": {
               "nodetype": "TypeReference",
               "name": "int"
               }
+            },
+            {
+            "nodetype": "Switch",
+            "location": "D:/COMP/GSON/HelloWorld.java:8",
+            "condition": {
+              "nodetype": "VariableRead",
+              "location": "D:/COMP/GSON/HelloWorld.java:8",
+              "var": {
+                "nodetype": "LocalVariableReference",
+                "name": "a",
+                "type": {
+                  "nodetype": "TypeReference",
+                  "name": "int"
+                  }
+                }
+              },
+            "cases": [
+              {
+              "nodetype": "Case",
+              "location": "D:/COMP/GSON/HelloWorld.java:9",
+              "expression": {
+                "nodetype": "Literal",
+                "location": "D:/COMP/GSON/HelloWorld.java:9",
+                "value": 2,
+                "type": {
+                  "nodetype": "TypeReference",
+                  "name": "int"
+                  }
+                },
+              "statements": [{
+                "nodetype": "Break",
+                "location": "D:/COMP/GSON/HelloWorld.java:10"
+                }]
+              },
+              {
+              "nodetype": "Case",
+              "location": "D:/COMP/GSON/HelloWorld.java:11",
+              "expression": {"nodetype": "NullNode"},
+              "statements": [{
+                "nodetype": "Invocation",
+                "location": "D:/COMP/GSON/HelloWorld.java:12",
+                "target": {
+                  "nodetype": "FieldRead",
+                  "location": "D:/COMP/GSON/HelloWorld.java:12",
+                  "target": {
+                    "nodetype": "TypeAccess",
+                    "location": "D:/COMP/GSON/HelloWorld.java:12",
+                    "target": {
+                      "nodetype": "TypeReference",
+                      "name": "System",
+                      "package": "java.lang"
+                      }
+                    },
+                  "var": {
+                    "nodetype": "FieldReference",
+                    "name": "out",
+                    "declarator": {
+                      "nodetype": "TypeReference",
+                      "name": "System",
+                      "package": "java.lang"
+                      },
+                    "type": {
+                      "nodetype": "TypeReference",
+                      "name": "PrintStream",
+                      "package": "java.io"
+                      }
+                    }
+                  },
+                "executable": {
+                  "nodetype": "ExecutableReference",
+                  "name": "println",
+                  "declarator": {
+                    "nodetype": "TypeReference",
+                    "name": "PrintStream",
+                    "package": "java.io"
+                    },
+                  "type": {
+                    "nodetype": "TypeReference",
+                    "name": "void"
+                    },
+                  "parameters": [{
+                    "nodetype": "TypeReference",
+                    "name": "String",
+                    "package": "java.lang"
+                    }]
+                  },
+                "arguments": [{
+                  "nodetype": "Literal",
+                  "location": "D:/COMP/GSON/HelloWorld.java:12",
+                  "value": "Bye",
+                  "type": {
+                    "nodetype": "TypeReference",
+                    "name": "String",
+                    "package": "java.lang"
+                    }
+                  }]
+                }]
+              }
+            ]
             }
           ]
           }

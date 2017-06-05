@@ -11,8 +11,11 @@ import expression.BinaryOperator;
 import expression.FieldRead;
 import expression.Literal;
 import expression.LocalVariableReference;
+import expression.NullNode;
 import expression.TypeAccess;
+import expression.UnaryOperator;
 import expression.VariableRead;
+import expression.VariableWrite;
 import member.Constructor;
 import member.Method;
 import reference.ArrayTypeReference;
@@ -21,9 +24,13 @@ import reference.FieldReference;
 import reference.Parameter;
 import reference.TypeReference;
 import statement.Block;
+import statement.Break;
 import statement.Comment;
+import statement.For;
 import statement.If;
 import statement.LocalVariable;
+import statement.Switch;
+import statement.Case;
 import type.ClassNode;
 import statement.Invocation;
 
@@ -39,7 +46,7 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 				throw new RuntimeException("nodetype property must be defined!"); // all JSON objects must have the property nodetype
 		}
 		String nodeType = nodeTypeEl.getAsString().toUpperCase(); // simply casting the object as string
-
+		
 		Class<? extends BasicNode> classToUse = null;
 		switch(nodeType) {
 			case "TYPEREFERENCE":
@@ -107,6 +114,24 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 				break;
 			case "FIELDREFERENCE":
 				classToUse = FieldReference.class;
+				break;
+			case "VARIABLEWRITE":
+				classToUse = VariableWrite.class;
+				break;
+			case "FOR":
+				classToUse = For.class;
+				break;
+			case "BREAK":
+				classToUse = Break.class;
+				break;
+			case "UNARYOPERATOR":
+				classToUse = UnaryOperator.class;
+				break;
+			case "SWITCH":
+				classToUse = Switch.class;
+				break;
+			case "CASE":
+				classToUse = Case.class;
 				break;
 		}
 			return jsonDeserializationContext.deserialize(jsonElement, classToUse); // automatic desearialization.
