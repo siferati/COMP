@@ -38,7 +38,7 @@ public class GsonTest {
 
   final public static String DEFAULT_CHAR_SET = "UTF-8";
 
-  public static void main(String[] args) {
+  public GsonTest() {
     MyNodeDeserializer typeAdapter = new MyNodeDeserializer();
     Gson gson = new GsonBuilder()
     .registerTypeAdapter(BasicNode.class, typeAdapter)
@@ -53,9 +53,7 @@ public class GsonTest {
 
     Root javaRootMapObject = gson.fromJson(read(json), Root.class);
 
-    GsonTest gsonTest = new GsonTest();
-
-    gsonTest.analyze(javaRootMapObject);
+    analyze(javaRootMapObject);
 
 
   }
