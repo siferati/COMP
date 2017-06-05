@@ -3,7 +3,6 @@ package nodes;
 import java.util.List;
 
 import reference.Parameter;
-import expression.Literal;
 import member.Constructor;
 import member.Method;
 import nodes.BasicNode;
@@ -27,7 +26,7 @@ public class Member extends BasicNode {
 				
 				System.out.println("Constructor - Name: " + name);
 				
-				List<Parameter> parameters = constructor.getParameters();
+				List<Reference> parameters = constructor.getParameters();
 			
 		        System.out.println("\n\tParameters:");
 				for(int i = 0; i < parameters.size(); i++) {
@@ -42,7 +41,7 @@ public class Member extends BasicNode {
 				
 				Statement body = method.getBody();
 				name = getName();
-				List<Parameter> param = method.getParameters();
+				List<Reference> param = method.getParameters();
 				Reference type = method.getType();
 				
 		        System.out.println("\n\tParameters:");

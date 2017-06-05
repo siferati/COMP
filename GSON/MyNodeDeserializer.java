@@ -8,17 +8,21 @@ import com.google.gson.JsonParseException;
 
 import nodes.BasicNode;
 import expression.BinaryOperator;
+import expression.FieldRead;
 import expression.Literal;
 import expression.LocalVariableReference;
+import expression.TypeAccess;
 import expression.VariableRead;
 import member.Constructor;
 import member.Method;
 import reference.ArrayTypeReference;
 import reference.ExecutableReference;
+import reference.FieldReference;
 import reference.Parameter;
 import reference.TypeReference;
 import statement.Block;
 import statement.Comment;
+import statement.If;
 import statement.LocalVariable;
 import type.ClassNode;
 import statement.Invocation;
@@ -29,10 +33,10 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
  @Override
 	public BasicNode deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) {
 		try {
-		JsonObject jsonObj = jsonElement.getAsJsonObject();  // vao buscar o objeto atual como um JsonObject para poderem ir buscar a propriedade que querem
-		JsonElement nodeTypeEl = jsonObj.get("nodetype"); 	 // get the type of the node so we can use the correct class
-		if (nodeTypeEl == null) {
-			throw new RuntimeException("nodetype property must be defined!"); // all JSON objects must have the property nodetype
+			JsonObject jsonObj = jsonElement.getAsJsonObject();  // vao buscar o objeto atual como um JsonObject para poderem ir buscar a propriedade que querem
+			JsonElement nodeTypeEl = jsonObj.get("nodetype"); 	 // get the type of the node so we can use the correct class
+			if (nodeTypeEl == null) {
+				throw new RuntimeException("nodetype property must be defined!"); // all JSON objects must have the property nodetype
 		}
 		String nodeType = nodeTypeEl.getAsString().toUpperCase(); // simply casting the object as string
 
@@ -89,8 +93,23 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 			case "COMMENT":
 				classToUse = Comment.class;
 				break;
+			case "IF":
+				classToUse = If.class;
+				break;
+			case "FIELDREAD":
+				classToUse = FieldRead.class;
+				break;
+			case "TYPEACCESS":
+				classToUse = TypeAccess.class;
+				break;
+			case "NULLNODE":
+				classToUse = NullNode.class;
+				break;
+			case "FIELDREFERENCE":
+				classToUse = FieldReference.class;
+				break;
 		}
-		return jsonDeserializationContext.deserialize(jsonElement, classToUse); // automatic desearialization.
+			return jsonDeserializationContext.deserialize(jsonElement, classToUse); // automatic desearialization.
 		} catch(Exception e) {
 			throw new JsonParseException(e);
 		}

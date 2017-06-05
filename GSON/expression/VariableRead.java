@@ -2,9 +2,9 @@ package expression;
 import nodes.Expression;
 
 public class VariableRead extends Expression {
-	private Expression reference;
+	private Expression var;
 	
-	public Expression getReference() {
-		return reference;
+	public Expression getVar() {
+		return var;
 	}
 }

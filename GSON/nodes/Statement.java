@@ -47,7 +47,7 @@ public class Statement extends BasicNode {
 	      		execRef.analyze();
       		}
       		
-      		List<Statement> arguments = invocation.getArguments();
+      		List<Expression> arguments = invocation.getArguments();
       		
 	        System.out.println("\n\tArguments:");
       		for(int i = 0; i < arguments.size(); i++) {
@@ -58,6 +58,35 @@ public class Statement extends BasicNode {
       	case "Comment":   		
       		Comment comment = (Comment) this;
       		
+      		String content = comment.getContent();
+      		String position = comment.getPosition();
+      		String type = comment.getType();
+      		
+      		if(content != null)
+      			System.out.println("Comment - content: " + content);
+      		
+      		if(position != null)
+      			System.out.println("Comment - position: " + position);
+      		
+      		if(type != null)
+      			System.out.println("Comment - type: " + type);
+      		
+      		break;
+      	case "If":
+      		If ifstatement = (If)this;
+      		
+      		Expression cond = ifstatement.getCondition();
+      		Statement then = ifstatement.getThen();
+      		Statement elseVar = ifstatement.getElse();
+      		
+      		if(cond != null)
+      			cond.analyze();
+      		
+      		if(then != null)
+      			then.analyze();
+      		
+      		if(elseVar != null && elseVar.getNodetype() != "NullNode")
+      			elseVar.analyze();
       		
       		break;
       	default:

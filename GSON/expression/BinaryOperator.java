@@ -1,4 +1,5 @@
 package expression;
+
 import nodes.Expression;
 
 public class BinaryOperator extends Expression { //aqui não estendi de BasicNode para esta classe poder ser usada como expression

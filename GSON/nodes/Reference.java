@@ -5,6 +5,7 @@ import java.util.List;
 import nodes.BasicNode;
 import reference.ArrayTypeReference;
 import reference.ExecutableReference;
+import reference.FieldReference;
 import reference.Parameter;
 import reference.TypeReference;
 
@@ -24,7 +25,7 @@ public class Reference extends BasicNode {
 	      		ExecutableReference execRef = (ExecutableReference) this;
 	      		Reference declarator = execRef.getDeclarator();
 	      		Reference type = execRef.getType();
-	      		List<Parameter> parameters = execRef.getParameters();
+	      		List<Reference> parameters = execRef.getParameters();
 	      		
 	      		if(name != null)
 	      			System.out.println("ExecutableReference - Name: " + name);
@@ -43,12 +44,12 @@ public class Reference extends BasicNode {
 	      		TypeReference typeRef = (TypeReference) this;
 	      		
 	      		if(name != null)
-	      			System.out.println("TypeReference - Name " + name);
+	      			System.out.println("TypeReference - Name: " + name);
 	      		
 	      		String pkg = typeRef.getPackage();
 	      		
 	      		if (pkg != null)
-	      			System.out.println("TypeReference - Package " + pkg);
+	      			System.out.println("TypeReference - Package: " + pkg);
 	      		
 	      		break;
 	      	case "Parameter":
@@ -57,7 +58,7 @@ public class Reference extends BasicNode {
 	      		Reference typeReference = param.getType();
 	      		
 	      		if(name != null)
-	      			System.out.println("Parameter " + name);
+	      			System.out.println("Parameter - Name: " + name);
 	      			
 	      		if(typeReference != null)
 	      			typeReference.analyze();
@@ -69,11 +70,24 @@ public class Reference extends BasicNode {
 	      		name = getName();
 	      		
 	      		if(name != null)
-	      			System.out.println("ArrayTypeReference " + name);	      		
+	      			System.out.println("ArrayTypeReference - Name: " + name);	      		
 	      		
 	      		if(typeArrayRef != null) {
 	      			typeArrayRef.analyze();
 	      		}
+	      		
+	      		break;
+	      	case "FieldReference":
+	      		FieldReference fieldRef = (FieldReference) this;
+	      		name = getName();
+	      		Reference decFieldRef = fieldRef.getDeclarator();
+	      		Reference typeFieldRef = fieldRef.getType();
+	      		
+	      		if(decFieldRef != null)
+	      			decFieldRef.analyze();
+	      		
+	      		if(typeFieldRef != null)
+	      			typeFieldRef.analyze();
 	      		
 	      		break;
 	      	default:

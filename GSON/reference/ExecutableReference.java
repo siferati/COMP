@@ -7,7 +7,7 @@ import nodes.Reference;
 public class ExecutableReference extends Reference {
 	private Reference declarator;
 	private Reference type;
-	private List<Parameter> parameters;
+	private List<Reference> parameters;
 	
 	public Reference getDeclarator() {
 		return declarator;
@@ -17,7 +17,7 @@ public class ExecutableReference extends Reference {
 		return type;
 	}
 	
-	public List<Parameter> getParameters() {
+	public List<Reference> getParameters() {
 		return parameters;
 	}
 }

@@ -4,12 +4,11 @@ import java.util.*;
 import nodes.Member;
 import nodes.Reference;
 import nodes.Statement;
-import reference.Parameter;
 
 public class Method extends Member {
 	private Reference type;
 	private Statement body;
-	private List<Parameter> parameters;
+	private List<Reference> parameters;
 	
 	public Reference getType() {
 		return type;
@@ -19,7 +18,7 @@ public class Method extends Member {
 		return body;
 	}
 	
-	public List<Parameter> getParameters() {
+	public List<Reference> getParameters() {
 		return parameters;
 	}
 }

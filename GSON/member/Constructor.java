@@ -3,17 +3,17 @@ import java.util.*;
 
 import nodes.Member;
 import nodes.Statement;
-import reference.Parameter;
+import nodes.Reference;
 
 public class Constructor extends Member {
 	private Statement body;
-	private List<Parameter> parameters;
+	private List<Reference> parameters;
 	
 	public Statement getBody() {
 		return body;
 	}
 	
-	public List<Parameter> getParameters() {
+	public List<Reference> getParameters() {
 		return parameters;
 	}
 }
