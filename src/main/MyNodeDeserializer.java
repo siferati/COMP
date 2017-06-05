@@ -33,6 +33,7 @@ import statement.OperatorAssignment;
 import statement.LocalVariable;
 import statement.Switch;
 import statement.Case;
+import statement.Return;
 import type.ClassNode;
 import statement.Invocation;
 import statement.While;
@@ -145,6 +146,9 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 				break;
 			case "WHILE":
 				classToUse = While.class;
+				break;
+			case "RETURN":
+				classToUse = Return.class;
 				break;
 		}
 			return jsonDeserializationContext.deserialize(jsonElement, classToUse); // automatic desearialization.
