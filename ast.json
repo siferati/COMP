@@ -113,7 +113,7 @@
               "rhs": {
                 "nodetype": "Literal",
                 "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:6",
-                "value": 5,
+                "value": 3,
                 "type": {
                   "nodetype": "TypeReference",
                   "name": "int"

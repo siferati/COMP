@@ -22,11 +22,21 @@ public class Statement extends BasicNode {
 
           // when its NOT only declaration
 	        if (localVariable.getInit() != null) {
-	          String content = variableName + " = " + localVariable.getInit().analyze(patternNode);
 
             if (patternNode.getValue().toString().equals("=")) {
-              System.out.println("Found pattern on line " + localVariable.getLocation());
-              Main.matchedNodes.add(new Match(patternNode.getValue().toString(), content, localVariable.getLocation()));
+
+              // add operator = TODO fazer verificaçoes de tags iguais aqui
+              Main.matchedNodes.add(new Match(patternNode.getValue().toString(), "=", localVariable.getLocation()));
+
+              // add lhs
+              SimpleNode lhs = (SimpleNode) patternNode.getChildren()[0];
+              Main.matchedNodes.add(new Match(lhs.getValue().toString(), variableName, localVariable.getLocation()));
+
+              // add rhs
+              SimpleNode rhs = (SimpleNode) patternNode.getChildren()[1];
+              Main.matchedNodes.add(new Match(rhs.getValue().toString(), localVariable.getInit().analyze(patternNode), localVariable.getLocation()));
+
+              System.out.println("Found pattern " + lhs.getValue() + " = " + rhs.getValue() + " on line " +  localVariable.getLocation());
             }
 	        }
 
