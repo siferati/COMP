@@ -37,6 +37,7 @@ import type.ClassNode;
 public class GsonTest {
 
   final public static String DEFAULT_CHAR_SET = "UTF-8";
+  public Root javaRootMapObject;
 
   public GsonTest() {
     MyNodeDeserializer typeAdapter = new MyNodeDeserializer();
@@ -51,10 +52,7 @@ public class GsonTest {
 
     File json = new File("ast.json");
 
-    Root javaRootMapObject = gson.fromJson(read(json), Root.class);
-
-    analyze(javaRootMapObject);
-
+    javaRootMapObject = gson.fromJson(read(json), Root.class);
 
   }
 
@@ -112,7 +110,7 @@ public class GsonTest {
   *
   * @param javaRootMapObject Tree root
   */
-  public void analyze(Root javaRootMapObject) {
+  public void analyze(Root javaRootMapObject, String pattern) {
 
     List<CompilationUnit> compilationUnits = javaRootMapObject.getCompilationUnits();
 
@@ -120,7 +118,7 @@ public class GsonTest {
     List<Type> types = compilationUnits.get(0).getTypes();
 
     for(int i = 0; i < types.size(); i++) {
-    	types.get(i).analyze();
+    	types.get(i).analyze(pattern);
     }
   }
 }

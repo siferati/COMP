@@ -77,6 +77,28 @@ class SimpleNode implements Node {
     }
   }
 
+
+  /**
+  * Go through parser tree, and try to match patterns with gson
+  */
+  public void findPattern(GsonTest gson) {
+
+    System.out.println("pattern: " + this.value);
+
+    gson.analyze(gson.javaRootMapObject, this.value.toString());
+
+    // go through all children
+    if (children != null) {
+      for (int i = 0; i < children.length; ++i) {
+        SimpleNode n = (SimpleNode)children[i];
+        if (n != null) {
+          n.findPattern(gson);
+        }
+      }
+    }
+
+  }
+
   public int getId() {
     return id;
   }

@@ -17,13 +17,17 @@ public class Main {
         // get AST root
         SimpleNode root = parser.start();
         // display AST
-        root.dump("");
+        //root.dump("");
+
+        // call gson
+        GsonTest gsonTest = new GsonTest();
+
+        root.findPattern(gsonTest);
+
       }
     }
     catch (Exception e) {
       System.out.println("Error: " + e);
     }
-
-    GsonTest gsonTest = new GsonTest();
   }
 }

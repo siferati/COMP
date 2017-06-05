@@ -9,61 +9,57 @@ import nodes.BasicNode;
 
 public class Member extends BasicNode {
 	protected String name;
-	
+
 	public String getName() {
 		return name;
 	}
-	
-	public String analyze() {
 
-		String retorno = "";
+	public void analyze(String pattern) {
 
 		switch (getNodetype()) {
 			case "Constructor":
 				Constructor constructor = (Constructor) this;
-				
+
 				String name = constructor.getName();
-				
-				System.out.println("Constructor - Name: " + name);
-				
+
+				//System.out.println("Constructor - Name: " + name);
+
 				List<Reference> parameters = constructor.getParameters();
-			
-		        System.out.println("\n\tParameters:");
+
+		        //System.out.println("\n\tParameters:");
 				for(int i = 0; i < parameters.size(); i++) {
-					parameters.get(i).analyze();
+					parameters.get(i).analyze(pattern);
 				}
-				
-				Statement statement = constructor.getBody();			
-				statement.analyze();
+
+				Statement statement = constructor.getBody();
+				statement.analyze(pattern);
 				break;
 			case "Method":
 				Method method = (Method)this;
-				
+
 				Statement body = method.getBody();
 				name = getName();
 				List<Reference> param = method.getParameters();
 				Reference type = method.getType();
-				
-		        System.out.println("\n\tParameters:");
+
+		        //System.out.println("\n\tParameters:");
 				for(int i = 0; i < param.size(); i++) {
-					param.get(i).analyze();
+					param.get(i).analyze(pattern);
 				}
-				
+
 				if (type != null)
-					type.analyze();
-				
+					type.analyze(pattern);
+
 				if(name != null)
-					System.out.println("Method - Name: " + name);
-				
+					//System.out.println("Method - Name: " + name);
+
 				if(body != null)
-					body.analyze();
-				
+					body.analyze(pattern);
+
 				break;
 			default:
-				System.out.println("Unsupported node type");
+				//System.out.println("Unsupported node type");
 				break;
 		}
-
-		return retorno;
 	}
 }

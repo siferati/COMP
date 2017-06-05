@@ -11,7 +11,7 @@ import expression.VariableWrite;
 import nodes.BasicNode;
 
 public class Expression extends BasicNode {
-	public String analyze() {
+	public String analyze(String pattern) {
 
 		String retorno = "";
 
@@ -26,34 +26,34 @@ public class Expression extends BasicNode {
 				// store initialization
 				retorno = literalValue;
 				break;
-			
+
 			case "BinaryOperator":
 				BinaryOperator binaryOp = (BinaryOperator) this;
-				
+
 				Expression lhsExp = binaryOp.getLhs();
 				Expression rhsExp = binaryOp.getRhs();
 				String op = binaryOp.getOperator();
 				Reference type = (Reference)binaryOp.getTypeReference();
-				
-				String lhs = lhsExp.analyze();
-				String rhs = rhsExp.analyze();
-				
-				System.out.println("BinaryOperator: " + lhs + " " + op + " " + rhs);
-				
+
+				String lhs = lhsExp.analyze(pattern);
+				String rhs = rhsExp.analyze(pattern);
+
+				//System.out.println("BinaryOperator: " + lhs + " " + op + " " + rhs);
+
 				String temp = rhs + " " + op + " " + rhs;
 				retorno += temp;
-				
+
 				if(type != null) {
-					type.analyze();
+					type.analyze(pattern);
 				}
-				
+
 				break;
 			case "UnaryOperator":
 				UnaryOperator unaryOperator = (UnaryOperator) this;
-				
+
 				String unary_op = unaryOperator.getOperator();
 				Expression operand = unaryOperator.getOperand();
-				
+
 				String tmpOp = "";
 				switch(unary_op) {
 					case "_++":
@@ -63,88 +63,88 @@ public class Expression extends BasicNode {
 						tmpOp = "--";
 						break;
 					default:
-						System.out.println("UnaryOperator - error: wrong operator");
+						//System.out.println("UnaryOperator - error: wrong operator");
 				}
-				
-				String res = operand.analyze();
-				System.out.println("UnaryOperator: " + res + tmpOp);
-				
+
+				String res = operand.analyze(pattern);
+				//System.out.println("UnaryOperator: " + res + tmpOp);
+
 				temp = res + tmpOp;
 				retorno += temp;
-				
+
 				break;
 			case "VariableRead":
 				VariableRead varRead = (VariableRead) this;
-				
+
 				type = varRead.getTypeReference();
 				Expression var = varRead.getVar();
 
 				if(type != null)
-					var.analyze();
-				
+					var.analyze(pattern);
+
 				if(var != null)
-					retorno = var.analyze();
-				
+					retorno = var.analyze(pattern);
+
 				break;
 			case "LocalVariableReference":
 				LocalVariableReference localVarRef = (LocalVariableReference) this;
-				
+
 				String name = localVarRef.getName();
 				type = localVarRef.getTypeReference();
-				
+
 				if(name != null)
-					System.out.println("LocalVariableReference - Name: " + name);
-				
+					//System.out.println("LocalVariableReference - Name: " + name);
+
 				if(type != null)
-					type.analyze();
-				
+					type.analyze(pattern);
+
 				retorno = name;
-				
+
 				break;
 			case "TypeAccess":
 				TypeAccess typeAcc = (TypeAccess) this;
-				
+
 				Reference target = typeAcc.getTarget();
 				type = typeAcc.getTypeReference();
-				
+
 				if(target != null)
-					target.analyze();
-				
+					target.analyze(pattern);
+
 				if(type != null)
-					type.analyze();
-				
+					type.analyze(pattern);
+
 				break;
 			case "FieldRead":
 				FieldRead fieldRead = (FieldRead) this;
-				
+
 				Expression targetFR = fieldRead.getTarget();
 				Reference varFR = fieldRead.getVar();
 				type = fieldRead.getTypeReference();
-				
+
 				if(targetFR != null)
-					targetFR.analyze();
-				
+					targetFR.analyze(pattern);
+
 				if(varFR != null)
-					varFR.analyze();
-					
+					varFR.analyze(pattern);
+
 				if(type != null)
-					type.analyze();
+					type.analyze(pattern);
 				break;
 			case "VariableWrite":
 				VariableWrite variableWrite = (VariableWrite) this;
-				
+
 				Expression varVW = variableWrite.getVar();
 				type = variableWrite.getTypeReference();
-				
+
 				if(varVW != null)
-					retorno = varVW.analyze();
-					
+					retorno = varVW.analyze(pattern);
+
 				if(type != null)
-					type.analyze();
-				
+					type.analyze(pattern);
+
 				break;
 			default:
-				System.out.println("Unsupported note type");
+				//System.out.println("Unsupported note type");
 				break;
 
 		}

@@ -12,6 +12,7 @@ src/*
 !src/HelloWorld.java
 !src/input.txt
 !src/Main.java
+!src/Match.java
 !src/MyNodeDeserializer.java
 !src/Parser.jjt
 !src/Root.java

@@ -6,39 +6,36 @@ import type.ClassNode;
 
 public class Type extends BasicNode {
 	protected String name;
-	
+
 	public String getName() {
 		return name;
 	}
-	
-	public String analyze() {
-	      // get initialization
-	      String initString = "";
-	      
+
+	public void analyze(String pattern) {
+
 		  switch (getNodetype()) {
 	      	case "Class":
 		        ClassNode classNode = (ClassNode) this;
-		        
+
 		        String pkg = classNode.getPackage();
 		        List<Member> members = classNode.getMembers();
-		        
+
 		        if(name != null) {
-		        	System.out.println("Class - Name: " + name);
+		        	//System.out.println("Class - Name: " + name);
 		        }
-		        
+
 		        if(pkg != null) {
-		        	System.out.println("Class - Package: " + pkg);
+		        	//System.out.println("Class - Package: " + pkg);
 		        }
-		        
-		        System.out.println("\n\tMembers:");
+
+		        //System.out.println("\n\tMembers:");
 		        for(int i = 0; i < members.size(); i++) {
-		        	members.get(i).analyze();
+		        	members.get(i).analyze(pattern);
 		        }
 		        break;
 	      	default:
-		        System.out.println("Unsupported Node Type");
+		        //System.out.println("Unsupported Node Type");
 		        break;
 		  }
-		  return initString;
 	  }
 }
