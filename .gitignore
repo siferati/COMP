@@ -1,3 +1,4 @@
+ast.json
 bin/*
 src/main/JJTParserState.java
 src/main/ParseException.java

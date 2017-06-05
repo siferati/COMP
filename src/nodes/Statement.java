@@ -25,7 +25,7 @@ public class Statement extends BasicNode {
 
 				if (patternNode.getValue().toString().equals("=")) {
 
-				  // add operator = TODO fazer verificaçoes de tags iguais aqui
+				  // add operator =
 				  //Main.matchedNodes.add(new Match(patternNode.getValue().toString(), "=", localVariable.getLocation()));
 
 				  // add lhs
@@ -219,7 +219,7 @@ public class Statement extends BasicNode {
 
 				if (patternNode.getValue().toString().equals("=")) {
 
-				  // add operator = TODO fazer verificaçoes de tags iguais aqui
+				  // add operator =
 				  Main.matchedNodes.add(new Match(patternNode.getValue().toString(), "=", assignment.getLocation()));
 
 				  // add lhs
@@ -251,7 +251,7 @@ public class Statement extends BasicNode {
 
 				if (patternNode.getValue().toString().equals("+=")) {
 
-				  // add operator = TODO fazer verificaçoes de tags iguais aqui
+				  // add operator = 
 				  Main.matchedNodes.add(new Match(patternNode.getValue().toString(), "+=", operatorAssign.getLocation()));
 
 
