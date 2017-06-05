@@ -13,7 +13,7 @@ import expression.Literal;
 import expression.LocalVariableReference;
 import expression.NullNode;
 import expression.TypeAccess;
-import expression.UnaryOperator;
+import statement.UnaryOperator;
 import expression.VariableRead;
 import expression.VariableWrite;
 import member.Constructor;
@@ -35,6 +35,7 @@ import statement.Switch;
 import statement.Case;
 import type.ClassNode;
 import statement.Invocation;
+import statement.While;
 
 import java.lang.reflect.Type;
 
@@ -141,6 +142,9 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 				break;
 			case "ASSIGNMENT":
 				classToUse = Assignment.class;
+				break;
+			case "WHILE":
+				classToUse = While.class;
 				break;
 		}
 			return jsonDeserializationContext.deserialize(jsonElement, classToUse); // automatic desearialization.
