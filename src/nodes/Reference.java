@@ -8,6 +8,7 @@ import reference.ExecutableReference;
 import reference.FieldReference;
 import reference.Parameter;
 import reference.TypeReference;
+import main.*;
 
 public class Reference extends BasicNode {
 	private String name;
@@ -16,7 +17,7 @@ public class Reference extends BasicNode {
 		return name;
 	}
 
-	  public String analyze(String pattern) {
+	  public String analyze(SimpleNode patternNode) {
 	      // get initialization
 	      String initString = "";
 
@@ -30,13 +31,13 @@ public class Reference extends BasicNode {
 	      		if(name != null)
 	      			//System.out.println("ExecutableReference - Name: " + name);
 	      		if(declarator != null)
-	      			declarator.analyze(pattern);
+	      			declarator.analyze(patternNode);
 	      		if(type != null)
-	      			type.analyze(pattern);
+	      			type.analyze(patternNode);
 
 		        //System.out.println("\n\tReference - Parameters:");
 	      		for(int i = 0; i < parameters.size(); i++) {
-	      			parameters.get(i).analyze(pattern);
+	      			parameters.get(i).analyze(patternNode);
 	      		}
 
 	      		break;
@@ -66,7 +67,7 @@ public class Reference extends BasicNode {
 						}
 
 	      		if(typeReference != null)
-	      			typeReference.analyze(pattern);
+	      			typeReference.analyze(patternNode);
 
 	      		break;
 	      	case "ArrayTypeReference":
@@ -78,7 +79,7 @@ public class Reference extends BasicNode {
 	      			//System.out.println("ArrayTypeReference - Name: " + name);
 
 	      		if(typeArrayRef != null) {
-	      			typeArrayRef.analyze(pattern);
+	      			typeArrayRef.analyze(patternNode);
 	      		}
 
 	      		break;
@@ -89,10 +90,10 @@ public class Reference extends BasicNode {
 	      		Reference typeFieldRef = fieldRef.getType();
 
 	      		if(decFieldRef != null)
-	      			decFieldRef.analyze(pattern);
+	      			decFieldRef.analyze(patternNode);
 
 	      		if(typeFieldRef != null)
-	      			typeFieldRef.analyze(pattern);
+	      			typeFieldRef.analyze(patternNode);
 
 	      		break;
 	      	default:

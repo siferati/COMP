@@ -9,9 +9,10 @@ import expression.UnaryOperator;
 import expression.VariableRead;
 import expression.VariableWrite;
 import nodes.BasicNode;
+import main.*;
 
 public class Expression extends BasicNode {
-	public String analyze(String pattern) {
+	public String analyze(SimpleNode patternNode) {
 
 		String retorno = "";
 
@@ -35,8 +36,8 @@ public class Expression extends BasicNode {
 				String op = binaryOp.getOperator();
 				Reference type = (Reference)binaryOp.getTypeReference();
 
-				String lhs = lhsExp.analyze(pattern);
-				String rhs = rhsExp.analyze(pattern);
+				String lhs = lhsExp.analyze(patternNode);
+				String rhs = rhsExp.analyze(patternNode);
 
 				//System.out.println("BinaryOperator: " + lhs + " " + op + " " + rhs);
 
@@ -44,7 +45,7 @@ public class Expression extends BasicNode {
 				retorno += temp;
 
 				if(type != null) {
-					type.analyze(pattern);
+					type.analyze(patternNode);
 				}
 
 				break;
@@ -66,7 +67,7 @@ public class Expression extends BasicNode {
 						//System.out.println("UnaryOperator - error: wrong operator");
 				}
 
-				String res = operand.analyze(pattern);
+				String res = operand.analyze(patternNode);
 				//System.out.println("UnaryOperator: " + res + tmpOp);
 
 				temp = res + tmpOp;
@@ -80,10 +81,10 @@ public class Expression extends BasicNode {
 				Expression var = varRead.getVar();
 
 				if(type != null)
-					var.analyze(pattern);
+					var.analyze(patternNode);
 
 				if(var != null)
-					retorno = var.analyze(pattern);
+					retorno = var.analyze(patternNode);
 
 				break;
 			case "LocalVariableReference":
@@ -96,7 +97,7 @@ public class Expression extends BasicNode {
 					//System.out.println("LocalVariableReference - Name: " + name);
 
 				if(type != null)
-					type.analyze(pattern);
+					type.analyze(patternNode);
 
 				retorno = name;
 
@@ -108,10 +109,10 @@ public class Expression extends BasicNode {
 				type = typeAcc.getTypeReference();
 
 				if(target != null)
-					target.analyze(pattern);
+					target.analyze(patternNode);
 
 				if(type != null)
-					type.analyze(pattern);
+					type.analyze(patternNode);
 
 				break;
 			case "FieldRead":
@@ -122,13 +123,13 @@ public class Expression extends BasicNode {
 				type = fieldRead.getTypeReference();
 
 				if(targetFR != null)
-					targetFR.analyze(pattern);
+					targetFR.analyze(patternNode);
 
 				if(varFR != null)
-					varFR.analyze(pattern);
+					varFR.analyze(patternNode);
 
 				if(type != null)
-					type.analyze(pattern);
+					type.analyze(patternNode);
 				break;
 			case "VariableWrite":
 				VariableWrite variableWrite = (VariableWrite) this;
@@ -137,10 +138,10 @@ public class Expression extends BasicNode {
 				type = variableWrite.getTypeReference();
 
 				if(varVW != null)
-					retorno = varVW.analyze(pattern);
+					retorno = varVW.analyze(patternNode);
 
 				if(type != null)
-					type.analyze(pattern);
+					type.analyze(patternNode);
 
 				break;
 			case "NullNode":

@@ -8,7 +8,7 @@ import main.*;
 
 public class Statement extends BasicNode {
 
-  public String analyze(String pattern) {
+  public String analyze(SimpleNode patternNode) {
 
 	  switch (getNodetype()) {
       	case "LocalVariable":
@@ -22,11 +22,11 @@ public class Statement extends BasicNode {
 
           // when its NOT only declaration
 	        if (localVariable.getInit() != null) {
-	          String content = variableName + " = " + localVariable.getInit().analyze(pattern);
+	          String content = variableName + " = " + localVariable.getInit().analyze(patternNode);
 
-            if (pattern.equals("=")) {
+            if (patternNode.getValue().toString().equals("=")) {
               System.out.println("Found pattern on line " + localVariable.getLocation());
-              Main.matchedNodes.add(new Match(pattern, content, localVariable.getLocation()));
+              Main.matchedNodes.add(new Match(patternNode.getValue().toString(), content, localVariable.getLocation()));
             }
 	        }
 
@@ -39,7 +39,7 @@ public class Statement extends BasicNode {
 
 	        //System.out.println("\n\tStatements:");
       		for(int i = 0; i < statements.size(); i++) {
-      			statements.get(i).analyze(pattern);
+      			statements.get(i).analyze(patternNode);
       		}
 
       		break;
@@ -49,14 +49,14 @@ public class Statement extends BasicNode {
 
       		if(ref != null) {
 	      		ExecutableReference execRef = (ExecutableReference) ref;
-	      		execRef.analyze(pattern);
+	      		execRef.analyze(patternNode);
       		}
 
       		List<Expression> arguments = invocation.getArguments();
 
 	        //System.out.println("\n\tArguments:");
       		for(int i = 0; i < arguments.size(); i++) {
-      			arguments.get(i).analyze(pattern);
+      			arguments.get(i).analyze(patternNode);
       		}
 
       		break;
@@ -85,13 +85,13 @@ public class Statement extends BasicNode {
       		Statement elseVar = ifstatement.getElse();
 
       		if(cond != null)
-      			cond.analyze(pattern);
+      			cond.analyze(patternNode);
 
       		if(then != null)
-      			then.analyze(pattern);
+      			then.analyze(patternNode);
 
       		if(elseVar != null && elseVar.getNodetype() != "NullNode")
-      			elseVar.analyze(pattern);
+      			elseVar.analyze(patternNode);
 
       		break;
       	case "Break":
@@ -105,16 +105,16 @@ public class Statement extends BasicNode {
       		List<Expression> update = forstatement.getUpdate();
 
       		if(body != null)
-      			body.analyze(pattern);
+      			body.analyze(patternNode);
 
       		for(int i = 0; i < init.size(); i++)
-      			init.get(i).analyze(pattern);
+      			init.get(i).analyze(patternNode);
 
       		if(condition != null)
-      			condition.analyze(pattern);
+      			condition.analyze(patternNode);
 
       		for(int i = 0; i < update.size(); i++)
-      			update.get(i).analyze(pattern);
+      			update.get(i).analyze(patternNode);
 
       		break;
       	case "Switch":
@@ -124,7 +124,7 @@ public class Statement extends BasicNode {
       		List<Statement> cases = switchstmt.getCases();
 
       		for(int i = 0; i < cases.size(); i++) {
-      			cases.get(i).analyze("");
+      			cases.get(i).analyze(patternNode);
       		}
 
       		break;
@@ -135,10 +135,10 @@ public class Statement extends BasicNode {
       		statements = casestmt.getStatements();
 
       		if(expression != null)
-      			expression.analyze("");
+      			expression.analyze(patternNode);
 
       		for(int i = 0; i < statements.size(); i++) {
-      			statements.get(i).analyze("");
+      			statements.get(i).analyze(patternNode);
       		}
 
       		break;
