@@ -1,3 +1,5 @@
+package main;
+
 /**
 * Copyright 2017 SPeCS.
 *

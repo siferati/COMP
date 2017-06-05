@@ -1,6 +1,12 @@
+package main;
+
 import java.io.*;
+import java.util.ArrayList;
 
 public class Main {
+
+
+  public static ArrayList<Match> matchedNodes = new ArrayList<Match>();
 
   public static void main(String args[]){
 

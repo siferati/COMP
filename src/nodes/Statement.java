@@ -4,10 +4,12 @@ import java.util.List;
 import nodes.BasicNode;
 import reference.ExecutableReference;
 import statement.*;
+import main.*;
 
 public class Statement extends BasicNode {
 
   public String analyze(String pattern) {
+
       // get initialization
       String initString = "";
 
@@ -27,6 +29,7 @@ public class Statement extends BasicNode {
 
             if (pattern.equals("=")) {
               System.out.println("Found pattern on line " + localVariable.getLocation());
+              Main.matchedNodes.add(new Match(pattern, "=", localVariable.getLocation()));
             }
 	        }
 

@@ -1,11 +1,11 @@
 PARSER_BEGIN(Parser)
-
+package main;
 import java.io.*;
 
 public class Parser {
 
   public Parser() {
-    
+
   }
 }
 
