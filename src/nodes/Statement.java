@@ -161,7 +161,7 @@ public class Statement extends BasicNode {
 	        // get variable name
 	        Expression lhsExp = assignment.getLhs();
 			Expression rhsExp = assignment.getRhs();
-			
+
 			String lhs = lhsExp.analyze(patternNode);
 
           // when its NOT only declaration
