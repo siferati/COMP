@@ -142,6 +142,29 @@ public class Statement extends BasicNode {
       		}
 
       		break;
+		case "Assignment":
+	        Assignment assignment = (Assignment) this;
+
+	        // get variable type (int, long, double, etc)
+	        variableType = assignment.getType().getName();
+
+	        // get variable name
+	        Expression lhsExp = assignment.getLhs();
+			Expression rhsExp = assignment.getRhs();
+			
+			String lhs = lhsExp.analyze(patternNode);
+
+          // when its NOT only declaration
+	        if (rhsExp != null) {
+				String rhs = rhsExp.analyze(patternNode);
+				content = lhs + " = " + rhs;
+
+				if (patternNode.getValue().toString().equals("=")) {
+				  System.out.println("Found pattern on line " + assignment.getLocation());
+				  Main.matchedNodes.add(new Match(patternNode.getValue().toString(), content, assignment.getLocation()));
+				}
+	        }
+			break;
       	default:
 	        //System.out.println("Unsupported Node Type");
 	        break;

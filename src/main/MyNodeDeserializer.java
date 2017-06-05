@@ -7,7 +7,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import nodes.BasicNode;
-import expression.Assignment;
 import expression.BinaryOperator;
 import expression.FieldRead;
 import expression.Literal;
@@ -24,6 +23,7 @@ import reference.ExecutableReference;
 import reference.FieldReference;
 import reference.Parameter;
 import reference.TypeReference;
+import statement.Assignment;
 import statement.Block;
 import statement.Break;
 import statement.Comment;

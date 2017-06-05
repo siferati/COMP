@@ -4,6 +4,8 @@ public class HelloWorld  {
 
         int a = 2;
         int b = a + 5;
+		
+		b = a;
     }
 
 }
