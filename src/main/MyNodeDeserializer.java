@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import nodes.BasicNode;
+import expression.Assignment;
 import expression.BinaryOperator;
 import expression.FieldRead;
 import expression.Literal;
@@ -137,6 +138,9 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 				break;
 			case "OPERATORASSIGNMENT":
 				classToUse = OperatorAssignment.class;
+				break;
+			case "ASSIGNMENT":
+				classToUse = Assignment.class;
 				break;
 		}
 			return jsonDeserializationContext.deserialize(jsonElement, classToUse); // automatic desearialization.
