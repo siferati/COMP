@@ -5,7 +5,6 @@ import expression.FieldRead;
 import expression.Literal;
 import expression.LocalVariableReference;
 import expression.TypeAccess;
-import expression.UnaryOperator;
 import expression.VariableRead;
 import expression.VariableWrite;
 import nodes.BasicNode;
@@ -56,31 +55,6 @@ public class Expression extends BasicNode {
 				if(type != null) {
 					type.analyze(patternNode);
 				}
-
-				break;
-			case "UnaryOperator":
-				UnaryOperator unaryOperator = (UnaryOperator) this;
-
-				String unary_op = unaryOperator.getOperator();
-				Expression operand = unaryOperator.getOperand();
-
-				String tmpOp = "";
-				switch(unary_op) {
-					case "_++":
-						tmpOp = "++";
-						break;
-					case "_--":
-						tmpOp = "--";
-						break;
-					default:
-						//System.out.println("UnaryOperator - error: wrong operator");
-				}
-
-				String res = operand.analyze(patternNode);
-				//System.out.println("UnaryOperator: " + res + tmpOp);
-
-				temp = res + tmpOp;
-				retorno += temp;
 
 				break;
 			case "VariableRead":
