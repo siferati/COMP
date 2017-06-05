@@ -8,6 +8,7 @@ public class Main {
 
 
   public static ArrayList<Match> matchedNodes = new ArrayList<Match>();
+  public static boolean starting = true;
 
   public static void main(String args[]){
 
@@ -42,8 +43,50 @@ public class Main {
 
   public static void displayPatternsFound() {
 
-    for (Match match : matchedNodes) {
-      //System.out.println(match);
+    for (int i = 0; i < matchedNodes.size(); i++) {
+
+      Match match = matchedNodes.get(i);
+
+      if (match.pattern.equals(match.content)) {
+
+        matchedNodes.remove(match);
+        i--;
+      }
+    }
+
+    boolean found = true;
+
+    for (int i = 0; i < matchedNodes.size(); i++) {
+
+      Match match = matchedNodes.get(i);
+
+      System.out.println(match);
+
+      if (!match.pattern.contains("@")) {
+        found = false;
+        break;
+      }
+
+      for (int j = i + 1; j < matchedNodes.size(); j++) {
+
+        Match match2 = matchedNodes.get(j);
+
+        if (match.pattern.equals(match2.pattern) &&
+            !match.content.equals(match2.content)) {
+          found = false;
+          break;
+        }
+      }
+
+      if (!found) {
+        break;
+      }
+    }
+
+    if (found) {
+      System.out.println("Pattern found on line " + matchedNodes.get(0).location);
+    } else {
+      System.out.println("Pattern not found!");
     }
   }
 }

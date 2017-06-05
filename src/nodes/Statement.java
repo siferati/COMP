@@ -26,7 +26,7 @@ public class Statement extends BasicNode {
 				if (patternNode.getValue().toString().equals("=")) {
 
 				  // add operator = TODO fazer verificaçoes de tags iguais aqui
-				  Main.matchedNodes.add(new Match(patternNode.getValue().toString(), "=", localVariable.getLocation()));
+				  //Main.matchedNodes.add(new Match(patternNode.getValue().toString(), "=", localVariable.getLocation()));
 
 				  // add lhs
 				  SimpleNode lhs = (SimpleNode) patternNode.getChildren()[0];
@@ -36,7 +36,7 @@ public class Statement extends BasicNode {
 				  SimpleNode rhs = (SimpleNode) patternNode.getChildren()[1];
 				  Main.matchedNodes.add(new Match(rhs.getValue().toString(), localVariable.getInit().analyze(patternNode), localVariable.getLocation()));
 
-				  System.out.println("Found pattern " + lhs.getValue() + " = " + rhs.getValue() + " on line " +  localVariable.getLocation());
+				  //System.out.println("Found pattern " + lhs.getValue() + " = " + rhs.getValue() + " on line " +  localVariable.getLocation());
 				}
 	        }
 
@@ -94,14 +94,29 @@ public class Statement extends BasicNode {
       		Statement then = ifstatement.getThen();
       		Statement elseVar = ifstatement.getElse();
 
-      		if(cond != null)
-      			cond.analyze(patternNode);
+          if (patternNode.getValue().toString().equals("if")) {
 
-      		if(then != null)
-      			then.analyze(patternNode);
+            if(cond != null) {
+              String condStr = cond.analyze((SimpleNode)patternNode.getChildren()[0]);
+              // Main.matchedNodes.add(new Match(
+              //     patternNode.getValue().toString(),
+              //     condStr,
+              //     ifstatement.getLocation()));
+            }
 
-      		if(elseVar != null && elseVar.getNodetype() != "NullNode")
-      			elseVar.analyze(patternNode);
+
+            if(then != null) {
+              then.analyze((SimpleNode)patternNode.getChildren()[1]);
+            }
+
+
+            if(elseVar != null && elseVar.getNodetype() != "NullNode")
+              elseVar.analyze(patternNode);
+
+
+				  //System.out.println("Found pattern " + lhs.getValue() + " = " + rhs.getValue() + " on line " +  localVariable.getLocation());
+
+          }
 
       		break;
       	case "Break":
@@ -163,7 +178,7 @@ public class Statement extends BasicNode {
 			Expression rhsExp = assignment.getRhs();
 
 			String lhs = lhsExp.analyze(patternNode);
-			
+
 	        if (rhsExp != null) {
 
 				if (patternNode.getValue().toString().equals("=")) {
@@ -179,10 +194,10 @@ public class Statement extends BasicNode {
 				  SimpleNode rhsSimpleNode = (SimpleNode) patternNode.getChildren()[1];
 				  Main.matchedNodes.add(new Match(rhsSimpleNode.getValue().toString(), rhsExp.analyze(patternNode), assignment.getLocation()));
 
-				  System.out.println("Found pattern " + lhsSimpleNode.getValue() + " = " + rhsSimpleNode.getValue() + " on line " +  assignment.getLocation());
+				  //System.out.println("Found pattern " + lhsSimpleNode.getValue() + " = " + rhsSimpleNode.getValue() + " on line " +  assignment.getLocation());
 				}
 	        }
-			
+
 			break;
       	default:
 	        //System.out.println("Unsupported Node Type");

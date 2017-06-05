@@ -36,12 +36,21 @@ public class Expression extends BasicNode {
 				String op = binaryOp.getOperator();
 				Reference type = (Reference)binaryOp.getTypeReference();
 
-				String lhs = lhsExp.analyze(patternNode);
-				String rhs = rhsExp.analyze(patternNode);
+				String lhsStr = lhsExp.analyze(patternNode);
+
+				String rhsStr = rhsExp.analyze(patternNode);
+
+				// add lhs
+				SimpleNode lhs = (SimpleNode) patternNode.getChildren()[0];
+				Main.matchedNodes.add(new Match(lhs.getValue().toString(), lhsStr, binaryOp.getLocation()));
+
+				// add rhs
+				SimpleNode rhs = (SimpleNode) patternNode.getChildren()[1];
+				Main.matchedNodes.add(new Match(rhs.getValue().toString(), rhsStr, binaryOp.getLocation()));
 
 				//System.out.println("BinaryOperator: " + lhs + " " + op + " " + rhs);
 
-				String temp = lhs + " " + op + " " + rhs;
+				String temp = lhsStr + " " + op + " " + rhsStr;
 				retorno += temp;
 
 				if(type != null) {

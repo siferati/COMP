@@ -88,15 +88,22 @@ class SimpleNode implements Node {
 
     gson.analyze(gson.javaRootMapObject, this);
 
-    // go through all children
-    if (children != null) {
-      for (int i = 0; i < children.length; ++i) {
-        SimpleNode n = (SimpleNode)children[i];
-        if (n != null) {
-          n.findPattern(gson);
+    // go through all children if this is tree root
+    if (Main.starting) {
+
+      Main.starting = false;
+
+      if (children != null) {
+        for (int i = 0; i < children.length; ++i) {
+          SimpleNode n = (SimpleNode)children[i];
+          if (n != null) {
+            n.findPattern(gson);
+          }
         }
       }
+
     }
+
 
   }
 

@@ -1,1 +1,4 @@
-@first = @second;
+if (@x == 0) {
+    @x = @y;
+    @y = 3;
+}
