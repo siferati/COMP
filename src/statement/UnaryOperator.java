@@ -1,9 +1,10 @@
-package expression;
+package statement;
 
 import nodes.Expression;
 import nodes.Reference;
+import nodes.Statement;
 
-public class UnaryOperator extends Expression {
+public class UnaryOperator extends Statement {
 	private String operator;
 	private Expression operand;
 	private Reference type;

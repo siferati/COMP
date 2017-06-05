@@ -119,6 +119,39 @@ public class Statement extends BasicNode {
           }
 
       		break;
+      	case "While":
+      		While whilestatement = (While)this;
+
+      		cond = whilestatement.getCondition();
+      		Statement bodyWhile = whilestatement.getBody();
+
+      		if(cond != null)
+      			cond.analyze(patternNode);
+
+      		if(bodyWhile != null)
+      			bodyWhile.analyze(patternNode);
+
+      		break;
+		case "UnaryOperator":
+			UnaryOperator unaryOperator = (UnaryOperator) this;
+
+			String unary_op = unaryOperator.getOperator();
+			Expression operand = unaryOperator.getOperand();
+
+			String tmpOp = "";
+			switch(unary_op) {
+				case "_++":
+					tmpOp = "++";
+					break;
+				case "_--":
+					tmpOp = "--";
+					break;
+				default:
+					//System.out.println("UnaryOperator - error: wrong operator");
+			}
+
+			String res = operand.analyze(patternNode);
+			break;
       	case "Break":
       		break;
       	case "For":
@@ -198,6 +231,40 @@ public class Statement extends BasicNode {
 				}
 	        }
 
+			break;
+		case "OperatorAssignment":
+			OperatorAssignment operatorAssign = (OperatorAssignment) this;
+			
+	        // get variable type (int, long, double, etc)
+	        variableType = operatorAssign.getType().getName();
+			
+	        // get variable names
+			lhsExp = operatorAssign.getLhs();
+			rhsExp = operatorAssign.getRhs();
+			
+			lhs = lhsExp.analyze(patternNode);
+			
+			if (rhsExp != null) {
+				
+				if (patternNode.getValue().toString().equals("+=")) {
+
+				  // add operator = TODO fazer verificaçoes de tags iguais aqui
+				  Main.matchedNodes.add(new Match(patternNode.getValue().toString(), "+=", operatorAssign.getLocation()));
+
+				  
+				  // add lhs
+				  SimpleNode lhsSimpleNode = (SimpleNode) patternNode.getChildren()[0];
+				  Main.matchedNodes.add(new Match(lhsSimpleNode.getValue().toString(), lhs, operatorAssign.getLocation()));
+				  
+				  // add rhs
+				  SimpleNode rhsSimpleNode = (SimpleNode) patternNode.getChildren()[1];
+				  Main.matchedNodes.add(new Match(rhsSimpleNode.getValue().toString(), rhsExp.analyze(patternNode), operatorAssign.getLocation()));
+
+				  System.out.println("Found pattern " + lhsSimpleNode.getValue() + " = " + rhsSimpleNode.getValue() + " on line " +  operatorAssign.getLocation());
+				}
+	        }
+			
+			
 			break;
       	default:
 	        //System.out.println("Unsupported Node Type");
