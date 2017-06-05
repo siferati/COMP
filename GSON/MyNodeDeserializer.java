@@ -18,8 +18,9 @@ import reference.ExecutableReference;
 import reference.Parameter;
 import reference.TypeReference;
 import statement.Block;
-import statement.ClassNode;
+import statement.Comment;
 import statement.LocalVariable;
+import type.ClassNode;
 import statement.Invocation;
 
 import java.lang.reflect.Type;
@@ -84,6 +85,9 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 				break;
 			case "ARRAYTYPEREFERENCE":
 				classToUse = ArrayTypeReference.class;
+				break;
+			case "COMMENT":
+				classToUse = Comment.class;
 				break;
 		}
 		return jsonDeserializationContext.deserialize(jsonElement, classToUse); // automatic desearialization.

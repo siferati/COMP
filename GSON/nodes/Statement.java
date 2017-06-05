@@ -3,10 +3,7 @@ import java.util.List;
 
 import nodes.BasicNode;
 import reference.ExecutableReference;
-import reference.Parameter;
-import statement.Block;
-import statement.Invocation;
-import statement.LocalVariable;
+import statement.*;
 
 public class Statement extends BasicNode {
 
@@ -35,6 +32,7 @@ public class Statement extends BasicNode {
       		
       		List<Statement> statements = block.getStatements();
       		
+	        System.out.println("\n\tStatements:");
       		for(int i = 0; i < statements.size(); i++) {
       			statements.get(i).analyze();
       		}
@@ -44,20 +42,23 @@ public class Statement extends BasicNode {
       		Invocation invocation = (Invocation) this;
       		Reference ref = invocation.getExecutable();
       		
-      		if(ref != null) {
-	      		String name = ref.getName();
-	      		System.out.println("(Class -> Constructor -> Block -> Invocation -> ExecutableReference) - Name: " + name);
-	      		
+      		if(ref != null) {	      		
 	      		ExecutableReference execRef = (ExecutableReference) ref;
 	      		execRef.analyze();
       		}
       		
       		List<Statement> arguments = invocation.getArguments();
       		
+	        System.out.println("\n\tArguments:");
       		for(int i = 0; i < arguments.size(); i++) {
       			arguments.get(i).analyze();
       		}
       		      		
+      		break;
+      	case "Comment":   		
+      		Comment comment = (Comment) this;
+      		
+      		
       		break;
       	default:
 	        System.out.println("Unsupported Node Type");

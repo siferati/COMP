@@ -32,7 +32,7 @@ import nodes.Reference;
 import nodes.Statement;
 import nodes.Type;
 import statement.Block;
-import statement.ClassNode;
+import type.ClassNode;
 
 public class GsonTest {
 
@@ -121,29 +121,8 @@ public class GsonTest {
     // there is only one compilation unit
     List<Type> types = compilationUnits.get(0).getTypes();
 
-    // get class
-    ClassNode classNode = (ClassNode) types.get(0);
-    System.out.println("(Class) - Name: " + classNode.getName());
-
-    // get all members
-    List<Member> members = classNode.getMembers();
-
-    System.out.println("\nMembers: ");
-    for (int i = 0; i < members.size(); i++) {
-    	members.get(i).analyze();
-    }
-    
-    // get first method
-    Method method = (Method) members.get(1);
-    System.out.println("(Class -> Method) - Name: " + method.getName());
-
-    // get method's body statements
-    List<Statement> statements = ((Block) method.getBody()).getStatements();
-
-    System.out.println("\nStatements: ");
-
-    for (int i = 0; i < statements.size(); i++) {
-      statements.get(i).analyze();
+    for(int i = 0; i < types.size(); i++) {
+    	types.get(i).analyze();
     }
   }
 }
