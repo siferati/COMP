@@ -25,6 +25,7 @@ TOKEN :
   | < LETTER : ["a"-"z", "A"-"Z"] >
   | < NULL : "null" >
   | < IF : "if" >
+  | < WHILE : "while" >
   | < TYPE : <INT> | <LONG> >
   | < #INT : "int" >
   | < #LONG : "long" >
@@ -46,11 +47,12 @@ TOKEN :
 * CFG
 *
 * start -> stmt* EOF
-* stmt -> assign | cond | decl
+* stmt -> assign | cond | whileloop | decl
 * assign -> pat EQ (val | pat) SCOL
 * pat -> PAT
 * val -> ID | NUM | NULL
 * cond -> IF OPAR comp CPAR OBRA stmt* CBRA
+* whileloop -> WHILE OPAR comp CPAR OBRA stmt* CBRA
 * comp -> pat COMP (val | pat)
 * decl -> TYPE pat SCOL
 */
@@ -62,10 +64,10 @@ SimpleNode start() : {}
   (stmt())* <EOF> {return jjtThis;}
 }
 
-// stmt -> assign | cond
+// stmt -> assign | cond | whileloop | decl
 void stmt() #void : {}
 {
-  assign() | cond() | decl()
+  assign() | cond() | whileloop() | decl()
 }
 
 // assign -> pat EQ (val | pat) SCOL
@@ -96,6 +98,15 @@ void val() : {Token t;}
 void cond() : {Token t;}
 {
   t = <IF> {jjtThis.value = t.image;} <OPAR> comp() <CPAR>
+  <OBRA>
+    (stmt())*
+  <CBRA>
+}
+
+// whileloop -> WHILE OPAR comp CPAR OBRA stmt* CBRA
+void whileloop() : {Token t;}
+{
+  t = <WHILE> {jjtThis.value = t.image;} <OPAR> comp() <CPAR>
   <OBRA>
     (stmt())*
   <CBRA>

@@ -88,6 +88,7 @@ public class Statement extends BasicNode {
 
       		break;
       	case "If":
+
       		If ifstatement = (If)this;
 
       		Expression cond = ifstatement.getCondition();
@@ -120,16 +121,18 @@ public class Statement extends BasicNode {
 
       		break;
       	case "While":
+
       		While whilestatement = (While)this;
 
       		cond = whilestatement.getCondition();
       		Statement bodyWhile = whilestatement.getBody();
 
-      		if(cond != null)
-      			cond.analyze(patternNode);
+      		if(cond != null) {
+            String condStr = cond.analyze((SimpleNode)patternNode.getChildren()[0]);
+          }
 
       		if(bodyWhile != null)
-      			bodyWhile.analyze(patternNode);
+      			bodyWhile.analyze((SimpleNode)patternNode.getChildren()[1]);
 
       		break;
 		case "UnaryOperator":
@@ -234,28 +237,28 @@ public class Statement extends BasicNode {
 			break;
 		case "OperatorAssignment":
 			OperatorAssignment operatorAssign = (OperatorAssignment) this;
-			
+
 	        // get variable type (int, long, double, etc)
 	        variableType = operatorAssign.getType().getName();
-			
+
 	        // get variable names
 			lhsExp = operatorAssign.getLhs();
 			rhsExp = operatorAssign.getRhs();
-			
+
 			lhs = lhsExp.analyze(patternNode);
-			
+
 			if (rhsExp != null) {
-				
+
 				if (patternNode.getValue().toString().equals("+=")) {
 
 				  // add operator = TODO fazer verificaçoes de tags iguais aqui
 				  Main.matchedNodes.add(new Match(patternNode.getValue().toString(), "+=", operatorAssign.getLocation()));
 
-				  
+
 				  // add lhs
 				  SimpleNode lhsSimpleNode = (SimpleNode) patternNode.getChildren()[0];
 				  Main.matchedNodes.add(new Match(lhsSimpleNode.getValue().toString(), lhs, operatorAssign.getLocation()));
-				  
+
 				  // add rhs
 				  SimpleNode rhsSimpleNode = (SimpleNode) patternNode.getChildren()[1];
 				  Main.matchedNodes.add(new Match(rhsSimpleNode.getValue().toString(), rhsExp.analyze(patternNode), operatorAssign.getLocation()));
@@ -263,8 +266,8 @@ public class Statement extends BasicNode {
 				  System.out.println("Found pattern " + lhsSimpleNode.getValue() + " = " + rhsSimpleNode.getValue() + " on line " +  operatorAssign.getLocation());
 				}
 	        }
-			
-			
+
+
 			break;
       	default:
 	        //System.out.println("Unsupported Node Type");

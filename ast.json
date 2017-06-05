@@ -2,24 +2,24 @@
   "nodetype": "Root",
   "compilation_units": [{
     "nodetype": "CompilationUnit",
-    "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java",
+    "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java",
     "types": [{
       "nodetype": "Class",
-      "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:1",
-      "name": "HelloWorld",
+      "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:1",
+      "name": "Example3",
       "package": "",
       "members": [
         {
         "nodetype": "Constructor",
-        "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:1",
+        "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:1",
         "name": "<init>",
         "parameters": [],
         "body": {
           "nodetype": "Block",
-          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:1",
+          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:1",
           "statements": [{
             "nodetype": "Invocation",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:1",
+            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:1",
             "executable": {
               "nodetype": "ExecutableReference",
               "name": "<init>",
@@ -41,7 +41,7 @@
         },
         {
         "nodetype": "Method",
-        "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:3",
+        "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:3",
         "name": "main",
         "type": {
           "nodetype": "TypeReference",
@@ -49,7 +49,7 @@
           },
         "parameters": [{
           "nodetype": "Parameter",
-          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:3",
+          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:3",
           "name": "args",
           "type": {
             "nodetype": "ArrayTypeReference",
@@ -62,11 +62,29 @@
           }],
         "body": {
           "nodetype": "Block",
-          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:3",
+          "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:3",
           "statements": [
             {
             "nodetype": "LocalVariable",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:5",
+            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:5",
+            "name": "x",
+            "type": {
+              "nodetype": "TypeReference",
+              "name": "int"
+              },
+            "init": {
+              "nodetype": "Literal",
+              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:5",
+              "value": 0,
+              "type": {
+                "nodetype": "TypeReference",
+                "name": "int"
+                }
+              }
+            },
+            {
+            "nodetype": "LocalVariable",
+            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:6",
             "name": "a",
             "type": {
               "nodetype": "TypeReference",
@@ -74,7 +92,7 @@
               },
             "init": {
               "nodetype": "Literal",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:5",
+              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:6",
               "value": 0,
               "type": {
                 "nodetype": "TypeReference",
@@ -83,29 +101,11 @@
               }
             },
             {
-            "nodetype": "LocalVariable",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:6",
-            "name": "b",
-            "type": {
-              "nodetype": "TypeReference",
-              "name": "int"
-              },
-            "init": {
-              "nodetype": "Literal",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:6",
-              "value": 0,
-              "type": {
-                "nodetype": "TypeReference",
-                "name": "int"
-                }
-              }
-            },
-            {
-            "nodetype": "If",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:8",
+            "nodetype": "While",
+            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:8",
             "condition": {
               "nodetype": "BinaryOperator",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:8",
+              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:8",
               "type": {
                 "nodetype": "TypeReference",
                 "name": "boolean"
@@ -113,10 +113,10 @@
               "operator": "==",
               "lhs": {
                 "nodetype": "VariableRead",
-                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:8",
+                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:8",
                 "var": {
                   "nodetype": "LocalVariableReference",
-                  "name": "a",
+                  "name": "x",
                   "type": {
                     "nodetype": "TypeReference",
                     "name": "int"
@@ -125,7 +125,7 @@
                 },
               "rhs": {
                 "nodetype": "Literal",
-                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:8",
+                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:8",
                 "value": 0,
                 "type": {
                   "nodetype": "TypeReference",
@@ -133,19 +133,19 @@
                   }
                 }
               },
-            "then": {
+            "body": {
               "nodetype": "Block",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:8",
+              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:8",
               "statements": [{
                 "nodetype": "Assignment",
-                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:9",
+                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:9",
                 "type": {
                   "nodetype": "TypeReference",
                   "name": "int"
                   },
                 "lhs": {
                   "nodetype": "VariableWrite",
-                  "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:9",
+                  "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:9",
                   "var": {
                     "nodetype": "LocalVariableReference",
                     "name": "a",
@@ -157,7 +157,7 @@
                   },
                 "rhs": {
                   "nodetype": "Literal",
-                  "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:9",
+                  "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/Example3.java:9",
                   "value": 3,
                   "type": {
                     "nodetype": "TypeReference",
@@ -165,8 +165,7 @@
                     }
                   }
                 }]
-              },
-            "else": {"nodetype": "NullNode"}
+              }
             }
           ]
           }

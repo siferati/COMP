@@ -25,7 +25,8 @@ public class Main {
         // get AST root
         SimpleNode root = parser.start();
         // display AST
-        //root.dump("");
+        System.out.println("\nPattern to look for:\n");
+        root.dump("");
 
         // call gson
         GsonTest gsonTest = new GsonTest();
@@ -53,6 +54,10 @@ public class Main {
         i--;
       }
     }
+
+    // for (Match match : matchedNodes) {
+    //   System.out.println(match);
+    // }
 
     boolean found = true;
 
@@ -82,9 +87,9 @@ public class Main {
     }
 
     if (found) {
-      System.out.println("Pattern found on line " + matchedNodes.get(0).location);
+      System.out.println("\nPattern found on line " + matchedNodes.get(0).location);
     } else {
-      System.out.println("Pattern not found!");
+      System.out.println("\nPattern not found!");
     }
   }
 }
