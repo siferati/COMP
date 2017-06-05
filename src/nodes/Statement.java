@@ -51,7 +51,11 @@ public class Statement extends BasicNode {
       		
 	        System.out.println("\n\tArguments:");
       		for(int i = 0; i < arguments.size(); i++) {
-      			arguments.get(i).analyze();
+      			String res = arguments.get(i).analyze();
+      			
+      			if(res != null) {
+      				System.out.println("Argument " + i + " - Value: " + res);
+      			}
       		}
       		      		
       		break;
@@ -110,6 +114,31 @@ public class Statement extends BasicNode {
       		
       		for(int i = 0; i < update.size(); i++)
       			update.get(i).analyze();
+      		
+      		break;
+      	case "Switch":
+      		Switch switchstmt = (Switch) this;
+      		
+      		condition = switchstmt.getCondition();
+      		List<Statement> cases = switchstmt.getCases();
+      		
+      		for(int i = 0; i < cases.size(); i++) {
+      			cases.get(i).analyze();
+      		}
+      		
+      		break;
+      	case "Case":
+      		Case casestmt = (Case) this;
+      		
+      		Expression expression = casestmt.getExpression();
+      		statements = casestmt.getStatements();
+      		
+      		if(expression != null)
+      			expression.analyze();
+      		
+      		for(int i = 0; i < statements.size(); i++) {
+      			statements.get(i).analyze();
+      		}
       		
       		break;
       	default:

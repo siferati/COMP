@@ -1,5 +1,3 @@
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -28,6 +26,7 @@ import statement.Break;
 import statement.Comment;
 import statement.For;
 import statement.If;
+import statement.OperatorAssignment;
 import statement.LocalVariable;
 import statement.Switch;
 import statement.Case;
@@ -47,6 +46,7 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 		}
 		String nodeType = nodeTypeEl.getAsString().toUpperCase(); // simply casting the object as string
 		
+		System.out.println("NODETYPE " + nodeType);
 		Class<? extends BasicNode> classToUse = null;
 		switch(nodeType) {
 			case "TYPEREFERENCE":
@@ -132,6 +132,9 @@ public class MyNodeDeserializer implements JsonDeserializer<BasicNode> {
 				break;
 			case "CASE":
 				classToUse = Case.class;
+				break;
+			case "OPERATORASSIGNMENT":
+				classToUse = OperatorAssignment.class;
 				break;
 		}
 			return jsonDeserializationContext.deserialize(jsonElement, classToUse); // automatic desearialization.
