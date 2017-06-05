@@ -40,7 +40,7 @@ public class Expression extends BasicNode {
 
 				//System.out.println("BinaryOperator: " + lhs + " " + op + " " + rhs);
 
-				String temp = rhs + " " + op + " " + rhs;
+				String temp = lhs + " " + op + " " + rhs;
 				retorno += temp;
 
 				if(type != null) {

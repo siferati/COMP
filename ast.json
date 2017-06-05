@@ -89,23 +89,35 @@
             "type": {
               "nodetype": "TypeReference",
               "name": "int"
-              }
-            },
-            {
-            "nodetype": "LocalVariable",
-            "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:7",
-            "name": "c",
-            "type": {
-              "nodetype": "TypeReference",
-              "name": "int"
               },
             "init": {
-              "nodetype": "Literal",
-              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:7",
-              "value": 5,
+              "nodetype": "BinaryOperator",
+              "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:6",
               "type": {
                 "nodetype": "TypeReference",
                 "name": "int"
+                },
+              "operator": "+",
+              "lhs": {
+                "nodetype": "VariableRead",
+                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:6",
+                "var": {
+                  "nodetype": "LocalVariableReference",
+                  "name": "a",
+                  "type": {
+                    "nodetype": "TypeReference",
+                    "name": "int"
+                    }
+                  }
+                },
+              "rhs": {
+                "nodetype": "Literal",
+                "location": "/home/tirafesi/Desktop/Aulas/COMP/COMP/examples/HelloWorld.java:6",
+                "value": 5,
+                "type": {
+                  "nodetype": "TypeReference",
+                  "name": "int"
+                  }
                 }
               }
             }
